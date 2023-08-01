@@ -1,0 +1,36 @@
+-- ddl- criar um banco
+
+CREATE DATABASE Exercicio_1_1
+
+--usar o banco
+
+USE Exercicio_1_1;
+
+-- criar tabelas
+
+CREATE TABLE Pessoa 
+(
+IdPessoa INT PRIMARY KEY IDENTITY,
+Nome VARCHAR(20) NOT NULL,
+CNH VARCHAR(10) NOT NULL UNIQUE
+);
+
+SELECT * FROM Pessoa
+
+CREATE TABLE Telefone
+(
+IdTelefone INT PRIMARY KEY IDENTITY,
+IdPessoa INT FOREIGN KEY REFERENCES Pessoa(IdPessoa) NOT NULL,
+Numero VARCHAR (20) NOT NULL UNIQUE
+);
+
+SELECT * FROM Telefone
+
+CREATE TABLE Email
+(
+IdEmail INT PRIMARY KEY IDENTITY,
+IdPessoa INT FOREIGN KEY REFERENCES Pessoa(IdPessoa) NOT NULL,
+Endereco VARCHAR(30) NOT NULL UNIQUE
+);
+
+SELECT * FROM Email

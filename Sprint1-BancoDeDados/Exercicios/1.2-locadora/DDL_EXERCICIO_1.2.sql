@@ -1,0 +1,57 @@
+--criar o banco de dados
+
+CREATE DATABASE Exercicio_1_2;
+
+--usar o banco
+
+USE Exercicio_1_2;
+
+--criar tabelas
+
+CREATE TABLE Empresa
+(
+	IdEmpresa INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(25) NOT NULL
+)
+
+CREATE TABLE Modelo
+(
+	IdModelo INT PRIMARY KEY IDENTITY,
+	Tipo VARCHAR(25) NOT NULL
+)
+
+CREATE TABLE Marca
+(
+	IdMarca INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(25) NOT NULL
+)
+
+CREATE TABLE Cliente
+(
+	IdCliente INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(25) NOT NULL,
+	CPF VARCHAR (12) UNIQUE NOT NULL
+)
+
+CREATE TABLE Veiculos
+(
+	IdVeiculos INT PRIMARY KEY IDENTITY,
+	IdModelo INT FOREIGN KEY REFERENCES Modelo(IdModelo) NOT NULL,
+	IdEmpresa INT FOREIGN KEY REFERENCES Empresa(IdEmpresa) NOT NULL,
+	IdMarca INT FOREIGN KEY REFERENCES Marca(IdMarca) NOT NULL,
+)
+
+CREATE TABLE Aluguel
+(
+	IdAluguel INT PRIMARY KEY IDENTITY,
+	IdCliente INT FOREIGN KEY REFERENCES Cliente(IdCliente) NOT NULL,
+	IdVeiclos INT FOREIGN KEY REFERENCES Veiculos(IdVeiculos) NOT NULL,
+	Preco VARCHAR(15) NOT NULL
+)
+
+SELECT * FROM Empresa
+SELECT * FROM Modelo
+SELECT * FROM Cliente
+SELECT * FROM Veiculos
+SELECT * FROM Marca
+SELECT * FROM Aluguel
