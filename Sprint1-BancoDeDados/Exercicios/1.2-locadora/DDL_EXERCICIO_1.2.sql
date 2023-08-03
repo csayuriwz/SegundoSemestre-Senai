@@ -1,4 +1,4 @@
---criar o banco de dados
+--criar o banco de dados ddl
 
 CREATE DATABASE Exercicio_1_2;
 
