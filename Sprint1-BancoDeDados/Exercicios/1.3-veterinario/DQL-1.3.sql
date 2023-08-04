@@ -1,10 +1,15 @@
 --DQL
+--listar todos os veterinários (nome e CRMV) de uma clínica (razão social)
+--listar todas as raças que começam com a letra S
+--listar todos os tipos de pet que terminam com a letra O
+--listar todos os pets mostrando os nomes dos seus donos
+--listar todos os atendimentos mostrando o nome do veterinário que atendeu, o nome, a raça e o tipo do pet que foi atendido, o nome do dono do pet e o nome da clínica onde o pet foi atendido
 
 
-USE Exercicio_1_3;
+USE Exercicio_1_3T;
 
 SELECT 
-	Veterinario.NomeVeterinario, Veterinario.CRMV
+	Veterinario.NomeVet
 FROM 
 	Veterinario 
 WHERE Veterinario.IdClinica = 1
@@ -33,13 +38,12 @@ LEFT JOIN Dono
 
 
 SELECT 
-	Atendimento.IDAtendimento AS [NUMERO ATENDIMENTO],
-	Dono.NomeDono AS [NOME DO DONO], 
-	Pet.NomePet AS [NOME DO PET], 
+	Atendimento.IdAtendimento AS [NUMERO ATENDIMENTO],
+	Dono.Nome AS [NOME DO DONO], 
+	Pet.Nome AS [NOME DO PET], 
 	Pet.IdTipoPet AS ESPECIE, 
 	Pet.IdRaca AS  RAÇA, 
-	Veterinario.NomeVeterinario AS VETERINÁRIO, 
-	Clinica.NomeClinica AS CLÍNICA
+	Veterinario.NomeVet AS VETERINÁRIO
 FROM 
 	Atendimento
 LEFT JOIN Veterinario 

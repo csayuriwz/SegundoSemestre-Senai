@@ -1,21 +1,28 @@
 --DML - INSERIR DADOS NAS TABELAS
 
-USE Exercicio_1_2;
+USE Exercicio_1_2T;
 
 INSERT INTO Empresa(Nome)
-VALUES ('Senai')
+VALUES ('KAVAK')
 
 INSERT INTO Marca(Nome)
-VALUES('Fiat')
+VALUES('Chevrolet')
 
-INSERT INTO Modelo(Nome)
-VALUES ('Uno')
+INSERT INTO Modelo(Tipo)
+VALUES ('Capitiva')
 
 INSERT INTO Cliente(Nome,CPF)
-VALUES ('Rebeca Carolina', '11122233344')
+VALUES ('Catarina Sayuri', '12338456723')
 
-INSERT INTO Veiculo(IdMarca, IdModelo, IdEmpresa, Placa)
-VALUES (1, 1, 1, 'AAA-AAAA')
+INSERT INTO Veiculos(IdMarca, IdModelo, IdEmpresa, Placa)
+VALUES (1, 2, 1, 'ABC123')
 
-INSERT INTO Aluguel(IdCliente, IdVeiculo, DataRetirada, DataDevolucao)
-VALUES (1, 1, '2023-08-01', '2024-01-01')
+INSERT INTO Aluguel(IdCliente,Preco, IdVeiculos)
+VALUES (1, 125.000, 6)
+
+SELECT * FROM Empresa
+SELECT * FROM Modelo
+SELECT * FROM Cliente
+SELECT * FROM Veiculos
+SELECT * FROM Marca
+SELECT * FROM Aluguel

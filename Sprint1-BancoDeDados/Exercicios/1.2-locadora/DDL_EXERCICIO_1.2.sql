@@ -1,10 +1,10 @@
 --criar o banco de dados ddl
 
-CREATE DATABASE Exercicio_1_2;
+CREATE DATABASE Exercicio_1_2T;
 
 --usar o banco
 
-USE Exercicio_1_2;
+USE Exercicio_1_2T;
 
 --criar tabelas
 
@@ -39,13 +39,14 @@ CREATE TABLE Veiculos
 	IdModelo INT FOREIGN KEY REFERENCES Modelo(IdModelo) NOT NULL,
 	IdEmpresa INT FOREIGN KEY REFERENCES Empresa(IdEmpresa) NOT NULL,
 	IdMarca INT FOREIGN KEY REFERENCES Marca(IdMarca) NOT NULL,
+	Placa Varchar(10) UNIQUE NOT NULL
 )
 
 CREATE TABLE Aluguel
 (
 	IdAluguel INT PRIMARY KEY IDENTITY,
 	IdCliente INT FOREIGN KEY REFERENCES Cliente(IdCliente) NOT NULL,
-	IdVeiclos INT FOREIGN KEY REFERENCES Veiculos(IdVeiculos) NOT NULL,
+	IdVeiculos INT FOREIGN KEY REFERENCES Veiculos(IdVeiculos) NOT NULL,
 	Preco VARCHAR(15) NOT NULL
 )
 
@@ -55,3 +56,5 @@ SELECT * FROM Cliente
 SELECT * FROM Veiculos
 SELECT * FROM Marca
 SELECT * FROM Aluguel
+
+Drop Table Veiculos;

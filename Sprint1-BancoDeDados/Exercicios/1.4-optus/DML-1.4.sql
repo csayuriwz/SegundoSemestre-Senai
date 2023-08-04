@@ -1,20 +1,20 @@
 --DML
-USE Exercicio_1_4;
+USE Exercicio_1_4T;
 
 INSERT INTO Artistas(Nome)
-VALUES('Carlos Roque')
+VALUES('Luan Santana')
 
 INSERT INTO Artistas(Nome)
-VALUES('Eduardo Costa')
+VALUES('Billie Eilish')
 
 INSERT INTO Albuns(IdArtista, Titulo, DataLancamento, Localizacao, QtdMin, Ativo)
 VALUES(1, 'Senai', '29-05-2020', 'São Caetano - SP', '10:32', 1)
 
 INSERT INTO GenerosMsc(Nome)
-VALUES('Rock')
+VALUES('PoP')
 
 INSERT INTO GenerosMsc(Nome)
-VALUES('Samba')
+VALUES('MPB')
 
 INSERT INTO EstilosMsc(IdAlbum, IdGenero)
 VALUES(2, 2)

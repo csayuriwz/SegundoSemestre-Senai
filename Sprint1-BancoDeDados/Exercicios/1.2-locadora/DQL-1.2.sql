@@ -1,23 +1,21 @@
-USE Exercicio_1_2;
+USE Exercicio_1_2T;
 
-SELECT Cliente.IdCliente, Cliente.Nome, Aluguel.DataRetirada, Aluguel.DataDevolucao, Modelo.Nome
+SELECT Cliente.IdCliente, Cliente.Nome, Modelo.Tipo
 FROM Aluguel
 LEFT JOIN Cliente ON Cliente.IdCliente = AlugueL.IdCliente
-LEFT JOIN Veiculo ON Veiculo.IdVeiculo = Veiculo.IdModelo 
-LEFT JOIN Modelo ON Modelo.IdModelo = Veiculo.IdModelo
+LEFT JOIN Veiculos ON Veiculos.IdVeiculos = Veiculos.IdModelo 
+LEFT JOIN Modelo ON Modelo.IdModelo = Veiculos.IdModelo
 WHERE Cliente.IdCliente = 1;
 
 
 SELECT 
 
 Cliente.Nome AS Nome,
-Aluguel.DataRetirada AS Retirada,
-Aluguel.DataDevolucao AS Devolução,
-Modelo.Nome AS Modelo
+Modelo.Tipo AS Modelo
 FROM
 Aluguel
 LEFT JOIN 
-Modelo ON Aluguel.IdVeiculo = Modelo.IdModelo
+Modelo ON Aluguel.IdVeiculos = Modelo.IdModelo
 LEFT JOIN 
 Cliente ON Aluguel.IdCliente = Cliente.IdCliente
 

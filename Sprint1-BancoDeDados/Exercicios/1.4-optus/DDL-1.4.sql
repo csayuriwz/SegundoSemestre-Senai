@@ -1,8 +1,8 @@
-CREATE DATABASE Exercicio_1_4
+CREATE DATABASE Exercicio_1_4T
 
 --DDL
 
-USE Exercicio_1_4;
+USE Exercicio_1_4T;
 
 CREATE TABLE Artistas
 (
@@ -28,7 +28,7 @@ IdGenero INT PRIMARY KEY IDENTITY,
 Nome VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE EstilosMsc
+CREATE TABLE Estilos
 (
 IdAlbum INT FOREIGN KEY REFERENCES Albuns(IdAlbum) NOT NULL,
 IdGenero INT FOREIGN KEY REFERENCES GenerosMsc(IdGenero) NOT NULL
@@ -41,3 +41,4 @@ Email VARCHAR(255) NOT NULL,
 Senha CHAR(60) NOT NULL,
 Permissao BIT NOT NULL
 )
+
