@@ -8,7 +8,7 @@ INSERT INTO Artistas(Nome)
 VALUES('Billie Eilish')
 
 INSERT INTO Albuns(IdArtista, Titulo, DataLancamento, Localizacao, QtdMin, Ativo)
-VALUES(1, 'Senai', '29-05-2020', 'São Caetano - SP', '10:32', 1)
+VALUES(1, 'Meteoro', '19-01-2021', 'São Caetano - SP', '52:48', 1)
 
 INSERT INTO GenerosMsc(Nome)
 VALUES('PoP')
@@ -16,8 +16,10 @@ VALUES('PoP')
 INSERT INTO GenerosMsc(Nome)
 VALUES('MPB')
 
-INSERT INTO EstilosMsc(IdAlbum, IdGenero)
-VALUES(2, 2)
+INSERT INTO EstiloMusical(IdAlbum, IdGenero)
+VALUES(1,1)
 
 INSERT INTO Usuarios(Nome, Email, Senha, Permissao)
-VALUES('Rebeca Carolina', 'rebeca@rebeca.com', 'senai@134', 1)
+VALUES('Catarina Sayuri', 'catarina.sayuri@gmail.com', 'senai@126', 1)
+
+Select * from Artistas

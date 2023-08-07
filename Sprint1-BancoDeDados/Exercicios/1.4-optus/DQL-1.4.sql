@@ -5,7 +5,7 @@
 
 CREATE DATABASE Exercicio_1_4;
 
-USE Exercicio_1_4;
+USE Exercicio_1_4T;
 
 
 SELECT 
@@ -26,7 +26,7 @@ Albuns.QtdMin AS MINUTOS,
 Albuns.Ativo AS ATIVO
 
 FROM Albuns
-WHERE Albuns.DataLancamento >= '01-01-2000'
+WHERE Albuns.DataLancamento >= '02-09-1986'
 
 
 SELECT 
@@ -36,7 +36,7 @@ Usuarios.Nome AS NOME,
 Usuarios.Permissao AS PERMISSÃO
 
 FROM Usuarios
-WHERE Usuarios.Email = 'rebeca@rebeca.com' AND Senha = 'senai@134'
+WHERE Usuarios.Email = 'catarina.sayuri@gmail.com' AND Senha = 'senai@126'
 
 SELECT 
 
