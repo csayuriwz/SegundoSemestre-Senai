@@ -6,7 +6,7 @@ namespace webapi.filmes.tarde.Interfaces
     ///  Interface responsavel pelo repositorio GeneroRepository
     ///  Definir os metodos que serao implementados pelo repositorio
     /// </summary>
-    public interface IGeneroRepositoty
+    public interface IGeneroRepository
     {
         //CRUD
 

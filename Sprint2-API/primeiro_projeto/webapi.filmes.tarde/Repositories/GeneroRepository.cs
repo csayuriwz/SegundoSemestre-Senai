@@ -4,7 +4,7 @@ using webapi.filmes.tarde.Interfaces;
 
 namespace webapi.filmes.tarde.Repositories
 {
-    public class GeneroRepository : IGeneroRepositoty
+    public class GeneroRepository : IGeneroRepository
     {
 
         /// <summary>
@@ -16,8 +16,8 @@ namespace webapi.filmes.tarde.Repositories
         ///     -windows: Integrated security = true
         ///     sqlserver: UserId=sa; pwd= Senha
         /// </summary>
-        private string StringConexao = "DataSource = NOTE13-S15; LazyInitializer catalog =Filmes_T; User Id = sa; Pwd = Senai@1234";
-
+        private string StringConexao = "Data Source = NOTE13-S15; Initial catalog = Filmes_T; User Id = sa; Pwd = Senai@134";
+        private SqlConnection con;
 
         public void AtualizarIdCorpo(GeneroDomain genero)
         {
@@ -34,15 +34,50 @@ namespace webapi.filmes.tarde.Repositories
             throw new NotImplementedException();
         }
 
+
+
+        /// <summary>
+        /// esse metodo vai cadastrar um novo genero
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         public void Cadastrar(GeneroDomain novoGenero)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                string queryInsert = "INSERT INTO Genero(Nome) VALUES(@Nome)";
+
+
+                using(SqlCommand cmd = new SqlCommand( queryInsert,con))
+                {
+                    cmd.Parameters.AddWithValue("@Nome", novoGenero.Nome);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                string queryInsert = $"DELETE FROM Genero WHERE Genero.IdGenero LIKE {id}";
+
+
+                using (SqlCommand cmd = new SqlCommand(queryInsert, con))
+                {
+                    //cmd.Parameters.AddWithValue("@Nome", novoGenero.Nome);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
+
+
+       
 
 
         /// <summary>
@@ -94,5 +129,7 @@ namespace webapi.filmes.tarde.Repositories
             //retorna a lista de generos
             return ListaGeneros;
         }
+
+       
     }
 }
