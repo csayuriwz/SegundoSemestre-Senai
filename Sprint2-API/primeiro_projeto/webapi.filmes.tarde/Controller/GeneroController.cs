@@ -47,7 +47,7 @@ namespace webapi.filmes.tarde.Controller
         /// </summary>
         /// <returns>Lista de generos e um statuscode</returns>
         [HttpGet]
-        public IActionResult Get() 
+        public IActionResult Get()
         {
 
             try
@@ -59,7 +59,7 @@ namespace webapi.filmes.tarde.Controller
                 return Ok(ListaGeneros);
                 //retorna OK lista generos
             }
-            catch (Exception erro) 
+            catch (Exception erro)
             {
                 //retorna um status code 400 - bad request, mensagem de erro
                 return BadRequest(erro.Message);
@@ -91,14 +91,20 @@ namespace webapi.filmes.tarde.Controller
             }
         }
 
-        [HttpDelete("{Id}")]
+
+        /// <summary>
+        /// EndPoint que acessa o metodo para deletar generos cadastrados
+        /// </summary>
+        /// <param name="id">Id do objeto cadastrado</param>
+        /// <returns>status code</returns>
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
                 _generoRepository.Deletar(id);
 
-                return Ok( id);
+                return Ok(id);
                 //return StatusCode(201, int id);
 
             }
@@ -108,15 +114,104 @@ namespace webapi.filmes.tarde.Controller
                 return BadRequest(erro.Message);
             }
         }
+        /// <summary>
+        /// EndPoint para acessar um metodo que busca generos por seu ID
+        /// </summary>
+        /// <param name="id">id do objeto a ser buscado</param>
+        /// <returns>genero buscado</returns>
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                GeneroDomain generoBuscado = _generoRepository.BuscarPorId(id);
 
-        [HttpPut("{id}")]
-
-        public IActionResult Put(int id)
-        { 
-             
+                if (generoBuscado == null)
+                {
+                    return NotFound("o genero buscado nao foi encontrado !");
+                }
+                return Ok(generoBuscado);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+            }
         }
 
 
+        /// <summary>
+        /// EndPoint para acessar um metodo que atualiza os generos por seus respectivos id's
+        /// </summary>
+        /// <param name="genero"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public IActionResult PutIdBody(GeneroDomain genero)
+        {
+            try
+            {
+                GeneroDomain generoBuscado = _generoRepository.BuscarPorId(genero.IdGenero);
 
+                if (generoBuscado != null)
+                {
+
+                    try
+                    {
+                       _generoRepository.AtualizarIdCorpo(genero);
+                       return NoContent();
+                    }
+                    catch (Exception erro)
+                    {
+                        return BadRequest(erro.Message);
+                    }
+                           
+                }
+                return NotFound("Genero nao encontrado !");
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+
+            }
+
+        }
+
+
+        /// <summary>
+        /// EndPoint que atualiza os generos por sua URL
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="genero"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+
+        public IActionResult PutIdUrl(int id,GeneroDomain genero)
+        {
+            try
+            {
+                GeneroDomain generoBuscado = _generoRepository.BuscarPorId(id);
+
+                if (generoBuscado != null)
+                {
+
+                    try
+                    {
+                        _generoRepository.atualizarIdUrl(id,genero);
+                        return NoContent();
+                    }
+                    catch (Exception erro)
+                    {
+                        return BadRequest(erro.Message);
+                    }
+
+                }
+                return NotFound("Genero nao encontrado !");
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro.Message);
+
+            }
+        }
+        
     }
 }
