@@ -132,6 +132,11 @@
             classe que representa a entidade(tabela) genero
             </summary>
         </member>
+        <member name="T:webapi.filmes.tarde.Domains.UsuarioDomain">
+            <summary>
+            Classe que representa a entidade Usuario
+            </summary>
+        </member>
         <member name="T:webapi.filmes.tarde.Interfaces.IFilmeRepository">
             <summary>
              Interface responsavel pelo repositorio de filmes FilmeRepository
@@ -207,6 +212,14 @@
             Deleta um genero existente pelo id
             </summary>
             <param name="id">id do objeto a ser deletado</param>
+        </member>
+        <member name="M:webapi.filmes.tarde.Interfaces.IUsuarioRepository.Login(System.String,System.String)">
+            <summary>
+            metodo que busca um usuario por email e por senha
+            </summary>
+            <param name="email">email do usuario</param>
+            <param name="senha">senha do usuario</param>
+            <returns>objeto(usuario) buscado</returns>
         </member>
         <member name="F:webapi.filmes.tarde.Repositories.webapi.filmes.tarde.Repositories.FilmeRepository.StringConexao">
             <summary>

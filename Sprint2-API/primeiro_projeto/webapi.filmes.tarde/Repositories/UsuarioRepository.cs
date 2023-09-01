@@ -8,7 +8,7 @@ namespace webapi.filmes.tarde.Repositories
     {
         private string StringConexao = "Data Source = NOTE13-S15; Initial catalog = Filmes_T; User Id = sa; Pwd = Senai@134";
 
-        public UsuarioDomain BuscarUsuario(string email, string senha)
+        public UsuarioDomain Login(string email, string senha)
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
@@ -40,5 +40,6 @@ namespace webapi.filmes.tarde.Repositories
             }
         }
 
+       
     }
 }
