@@ -12,31 +12,29 @@ namespace webapi.filmes.tarde.Repositories
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
-                string queryLogin = "SELECT IdUsuario, Email, Permissao FROM Usuario WHERER Email = @Email AND Senha = @Senha";
+                string queryLogin = "SELECT IdUsuario, Email, Permissao FROM Usuario WHERE Email = @Email AND Senha = @Senha";
 
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand(queryLogin, con))
+                using SqlCommand cmd = new SqlCommand(queryLogin, con);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Senha", senha);
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                if (rdr.Read())
                 {
-                    cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Parameters.AddWithValue("@Senha", senha);
-
-                    SqlDataReader rdr = cmd.ExecuteReader();
-
-                    if(rdr.Read()) 
+                    UsuarioDomain usuario = new UsuarioDomain()
                     {
-                        UsuarioDomain usuario = new UsuarioDomain()
-                        {
-                            IdUsuario = Convert.ToInt32(rdr["IdUsuario"]),
-                            Email = rdr["Email"].ToString(),
-                            Permissao = rdr["Permissao"].ToString()
-                        };
+                        IdUsuario = Convert.ToInt32(rdr["IdUsuario"]),
+                        Email = rdr["Email"].ToString(),
+                        Permissao = rdr["Permissao"].ToString()
+                    };
 
-                        return usuario;
+                    return usuario;
 
-                    }
-
-                    return null;
                 }
+
+                return null;
             }
         }
 

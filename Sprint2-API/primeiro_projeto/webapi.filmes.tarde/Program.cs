@@ -1,3 +1,4 @@
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -14,7 +15,33 @@ builder.Services.AddAuthentication(options =>
 })
 
     //define os parametros de validacao do token
-    .AddJwtBearer(options => { }); //continuar segunda
+    .AddJwtBearer("JwtBearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            //valida quem esta solicitando 
+            ValidateIssuer = true,
+
+            //valida quem esta recebendo 
+            ValidateAudience = true,
+
+            //define se o tempo de expiracao do token sera valiado
+            ValidateLifetime = true,
+
+            //forma de criptografia e ainda validacao da chave de autenticacao
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("filmes-chave-autenticacao-webapi-dev")),
+
+            //valida o tempo de expiracao do token
+            ClockSkew = TimeSpan.FromMinutes(5),
+
+            //De onde esta vindo (issuer)
+            ValidIssuer = "webapi.filmes.tarde",
+
+            //para onde esta indo
+            ValidAudience = "webapi.filmes.tarde"
+        };
+
+    });
 
 //Adicione o gerador do Swagger à coleção de serviços
 builder.Services.AddSwaggerGen(options =>
@@ -23,7 +50,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "API Filmes",
-        Description = "API para o gerencamento de filmes - Introducao a sprint 2 - Backend-API",
+        Description = "API para o gerenciamento de filmes - Introducao a sprint 2 - Backend-API",
         Contact = new OpenApiContact
         {
             Name = "Catarina Sayuri",
@@ -34,6 +61,33 @@ builder.Services.AddSwaggerGen(options =>
     //Configure o Swagger para usar o arquivo XML gerado com as instruções anteriores.
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    //Usando a autenticacao do swagger
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Value : Bearer TokenJWT"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+                }
+            },
+            new string[]{}
+        }
+       
+    }); 
 });
 
 var app = builder.Build();
@@ -52,8 +106,13 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
+//usar a autenticacao
+app.UseAuthentication();
+
+//usar a autorizacao
+app.UseAuthorization();
+
 //mapeia os controllers
 app.MapControllers();
 
 app.Run();
-  
