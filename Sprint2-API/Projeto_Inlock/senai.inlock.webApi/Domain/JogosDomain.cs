@@ -4,7 +4,7 @@ namespace senai.inlock.webApi_.Domain
 {
     public class JogosDomain
     {
-        public int IdJogos { get; set; }
+        public int IdJogo { get; set; }
 
         public int IdEstudio { get; set; }
 

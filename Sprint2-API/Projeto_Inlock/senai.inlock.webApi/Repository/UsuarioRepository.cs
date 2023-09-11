@@ -8,7 +8,6 @@ namespace senai.inlock.webApi_.Repository
     {
 
         private string StringConexao = "Data Source = NOTE13-S15; Initial catalog = inlock_games_Tarde; User Id = sa; Pwd = Senai@134";
-        private SqlConnection con;
 
         public UsuarioDomain Login(string email, string senha)
         {
@@ -16,7 +15,7 @@ namespace senai.inlock.webApi_.Repository
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
 
-                string queryLogin = "SELECT IdUsuario, Email,TipoUsuario FROM Usuario WHERE Email = @Email AND Senha = @Senha";
+                string queryLogin = "SELECT IdUsuario, Email,IdTipoUsuario FROM Usuario WHERE Email = @Email AND Senha = @Senha";
 
                 con.Open();
 
@@ -35,7 +34,7 @@ namespace senai.inlock.webApi_.Repository
                         {
                             IdUsuario = Convert.ToInt32(rdr["IdUsuario"]),
                             Email = rdr["Email"].ToString(),
-                            IdTiposUsuario = Convert.ToInt32(rdr["TipoUsuario"])
+                            IdTiposUsuario = Convert.ToInt32(rdr["IdTipoUsuario"])
                         };
 
                         return usuario;

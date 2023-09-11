@@ -29,16 +29,16 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
 
             //forma de criptografia e ainda validacao da chave de autenticacao
-            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("filmes-chave-autenticacao-webapi-dev")),
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("jogos-chave-autenticacao-webapi-dev")),
 
             //valida o tempo de expiracao do token
             ClockSkew = TimeSpan.FromMinutes(5),
 
             //De onde esta vindo (issuer)
-            ValidIssuer = "webapi.filmes.tarde",
+            ValidIssuer = "senai.inlock.webApi.",
 
             //para onde esta indo
-            ValidAudience = "webapi.filmes.tarde"
+            ValidAudience = "senai.inlock.webApi."
         };
 
     });

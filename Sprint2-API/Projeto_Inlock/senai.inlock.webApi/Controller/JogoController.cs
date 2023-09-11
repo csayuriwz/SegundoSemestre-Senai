@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai.inlock.webApi_.Domain;
 using senai.inlock.webApi_.Interface;
@@ -20,6 +21,7 @@ namespace senai.inlock.webApi_.Controller
         }
 
         [HttpPost]
+        [Authorize(Roles = "2")]
         public IActionResult Post(JogosDomain novoJogo)
         {
 
@@ -45,6 +47,7 @@ namespace senai.inlock.webApi_.Controller
         }
 
         [HttpDelete]
+        [Authorize(Roles = "2")]
         public IActionResult Delete(int id)
         {
             try
