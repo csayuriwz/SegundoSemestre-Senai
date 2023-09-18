@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Y4LFgw6HtAIULLpmmfOXIunNcNtVugVtYvJJicBIxf6rLSq7tGz2ZGmWaUSV0S/lVoHYLSpHbzCfqAAx8Mesug==",
+  "dgSpecHash": "Z1TFouVxMCkDGqQv0/sDjWn9kewv5ZE38sKy/2YjSc6yD/mG+4RUZTq940TUvrDuV8n8TbQBFxuBy22B8/596g==",
   "success": true,
   "projectFilePath": "C:\\Users\\40666090823\\Desktop\\SegundoSemestre-Senai\\Sprint2-API\\inlock_codeFirst\\webapi.inlock.codeFirst.tarde\\webapi.inlock.codeFirst.tarde.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,7 @@
     "C:\\Users\\40666090823\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\40666090823\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\40666090823\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.11\\microsoft.aspnetcore.authentication.jwtbearer.7.0.11.nupkg.sha512",
-    "C:\\Users\\40666090823\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
+    "C:\\Users\\40666090823\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.11\\microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512",
     "C:\\Users\\40666090823\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\40666090823\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",
     "C:\\Users\\40666090823\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.1.0\\microsoft.data.sqlclient.sni.runtime.5.1.0.nupkg.sha512",
