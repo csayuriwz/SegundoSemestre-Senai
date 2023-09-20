@@ -23,12 +23,12 @@ namespace webapi.event_.tarde.Controllers
         }
 
 
-
-        public IActionResult Login(LoginViewModel LogarUsuario)
+        [HttpPost]
+        public IActionResult Login(LoginViewModel usuario)
         {
             try
             {
-                Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(LogarUsuario.Email!, LogarUsuario.Senha!);
+                Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailESenha(usuario.Email!, usuario.Senha!);
 
                 if (usuarioBuscado == null)
                 {
@@ -38,26 +38,29 @@ namespace webapi.event_.tarde.Controllers
 
                 var claims = new[]
                    {
-                    new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
-                    new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, usuarioBuscado.Email!)
+                    
+                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email!),
+                    new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.Nome!),
+                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
+                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
                 };
 
 
 
-                var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("evento-key-webapi"));
+                var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("event-webapi-chave-autenticacao-codefirst-tarde"));
 
 
                 var creds = new SigningCredentials(Key, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken
                 (
-                    issuer: "webapi-event+",
+                    issuer: "webapi.event+.tarde",
 
-                    audience: "webapi-event+",
+                    audience: "webapi.event+.tarde",
 
                     claims: claims,
 
-                    expires: DateTime.Now.AddMinutes(4),
+                    expires: DateTime.Now.AddMinutes(12),
 
                     signingCredentials: creds
 
@@ -79,4 +82,4 @@ namespace webapi.event_.tarde.Controllers
         }
     }
 }
-}
+
