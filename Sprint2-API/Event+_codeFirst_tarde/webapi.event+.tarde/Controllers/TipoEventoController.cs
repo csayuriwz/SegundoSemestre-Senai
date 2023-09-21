@@ -9,22 +9,20 @@ namespace webapi.event_.tarde.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    public class UsuarioController : ControllerBase
+    public class TipoEventoController : ControllerBase
     {
-        private IUsuarioRepository _usuarioRepository { get; set; }
+        private ITipoEventoRepository _tipoEventoRepository { get; set; }
 
-        public UsuarioController()
+        public TipoEventoController()
         {
-            /// _usuarioRepository eh a variave do tipo interface que tem os metodos nao implentados  e aqui no ctor to instanciando a variavel para UsuarioRepository, onde esta a logica, ligando os 2
-            _usuarioRepository = new UsuarioRepository();
+            _tipoEventoRepository = new TipoEventoRepository();
         }
-
         [HttpPost]
-        public IActionResult Post(Usuario usuario)
+        public IActionResult Post(TipoEvento tipoevento)
         {
             try
             {
-                _usuarioRepository.Cadastrar(usuario);
+                _tipoEventoRepository.Cadastrar(tipoevento);
 
                 return StatusCode(201);
             }
@@ -35,13 +33,27 @@ namespace webapi.event_.tarde.Controllers
             }
 
         }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _tipoEventoRepository.Deletar(id);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
             try
             {
-                return Ok(_usuarioRepository.BuscarPorId(id));
+                return Ok(_tipoEventoRepository.BuscarPorId(id));
             }
             catch (Exception e)
             {

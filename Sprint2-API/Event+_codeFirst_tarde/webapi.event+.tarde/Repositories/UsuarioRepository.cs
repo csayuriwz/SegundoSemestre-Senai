@@ -13,6 +13,8 @@ namespace webapi.event_.tarde.Repositories
         {
             _eventContext = new EventContext();
         }
+
+
         public Usuario BuscarPorEmailESenha(string email, string senha)
         {
             try
@@ -95,5 +97,7 @@ namespace webapi.event_.tarde.Repositories
                 throw;
             }
         }
+
+       
     }
 }

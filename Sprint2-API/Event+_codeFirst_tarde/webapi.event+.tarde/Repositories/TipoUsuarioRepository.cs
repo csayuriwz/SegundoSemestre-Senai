@@ -18,9 +18,9 @@ namespace webapi.event_.tarde.Repositories
             throw new NotImplementedException();
         }
 
-        public List<TipoUsuario> BuscarPorId(Guid id)
+        public TipoUsuario BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return _eventContext.TipoUsuario.FirstOrDefault(e => e.IdTipoUsuario == id)!;
         }
 
         public void Cadastrar(TipoUsuario tipousuario)
@@ -40,7 +40,28 @@ namespace webapi.event_.tarde.Repositories
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TipoEvento usuarioB = _eventContext.TipoEvento.Find(id);
+
+                if (usuarioB != null)
+                {
+                    _eventContext.TipoEvento.Remove(usuarioB);
+                }
+
+                _eventContext.SaveChanges();
+            }
+
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<TipoUsuario> ListarTodos()
+        {
+            return _eventContext.TipoUsuario.ToList();
         }
     }
 }

@@ -1,30 +1,30 @@
-﻿using webapi.event_.tarde.Contexts;
+﻿
+using webapi.event_.tarde.Contexts;
 using webapi.event_.tarde.Domains;
 using webapi.event_.tarde.Interfaces;
-
 namespace webapi.event_.tarde.Repositories
 {
-    public class PresencaEventoRepository : IPresencaEventoRepository
+    public class InstituicaoRepository : IInstituicaoRepository
     {
         private readonly EventContext _eventContext;
 
-        public PresencaEventoRepository()
+        public InstituicaoRepository()
         {
             _eventContext = new EventContext();
         }
-        public void Atualizar(Guid id, PresencaEvento presencaevento)
+        public void Atualizar(Guid id, Instituicao instituicao)
         {
             throw new NotImplementedException();
         }
 
-        public PresencaEvento BuscarPorId(Guid id)
+        public Instituicao BuscarPorId(Guid id)
         {
-            return _eventContext.PresencaEvento.FirstOrDefault(e => e.IdPresencaEvento == id)!;
+            return _eventContext.Instituicao.FirstOrDefault(e => e.IdInstituicao == id)!;
         }
 
-        public void Cadastrar(PresencaEvento presencaevento)
+        public void Cadastrar(Instituicao instituicao)
         {
-            _eventContext.PresencaEvento.Add(presencaevento);
+            _eventContext.Instituicao.Add(instituicao);
 
             _eventContext.SaveChanges();
         }
@@ -33,11 +33,11 @@ namespace webapi.event_.tarde.Repositories
         {
             try
             {
-                TipoEvento presencaB = _eventContext.TipoEvento.Find(id);
+                TipoEvento instituicaoB = _eventContext.TipoEvento.Find(id);
 
-                if (presencaB != null)
+                if (instituicaoB != null)
                 {
-                    _eventContext.TipoEvento.Remove(presencaB);
+                    _eventContext.TipoEvento.Remove(instituicaoB);
                 }
 
                 _eventContext.SaveChanges();
@@ -50,10 +50,9 @@ namespace webapi.event_.tarde.Repositories
             }
         }
 
-        public List<PresencaEvento> ListarTodos()
+        public List<Instituicao> ListarTodos()
         {
             throw new NotImplementedException();
         }
-
     }
 }

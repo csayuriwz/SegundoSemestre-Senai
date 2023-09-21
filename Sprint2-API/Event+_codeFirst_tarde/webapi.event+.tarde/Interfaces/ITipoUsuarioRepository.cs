@@ -8,7 +8,7 @@ namespace webapi.event_.tarde.Interfaces
 
         void Deletar(Guid id);
 
-        List<TipoUsuario> BuscarPorId(Guid id);
+        TipoUsuario BuscarPorId(Guid id);
 
         void Atualizar(Guid id, TipoUsuario tipoUsuario);
 

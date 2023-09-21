@@ -36,5 +36,19 @@ namespace webapi.event_.tarde.Controllers
             
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_tipoUsuarioRepository.BuscarPorId(id));
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }
