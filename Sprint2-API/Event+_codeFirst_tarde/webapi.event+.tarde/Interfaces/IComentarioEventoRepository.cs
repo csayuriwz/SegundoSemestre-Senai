@@ -2,7 +2,7 @@
 
 namespace webapi.event_.tarde.Interfaces
 {
-    public interface IComentarioEvento
+    public interface IComentarioEventoRepository
     {
         void Cadastrar( ComentarioEvento comentarioevento);
 

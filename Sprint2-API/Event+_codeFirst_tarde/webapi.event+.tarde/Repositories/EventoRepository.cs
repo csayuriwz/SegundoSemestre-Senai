@@ -13,7 +13,24 @@ namespace webapi.event_.tarde.Repositories
         }
         public void Atualizar(Guid id, Evento evento)
         {
-            throw new NotImplementedException();
+            Evento eventoB = _eventContext.Evento.FirstOrDefault(e => e.IdEvento == id)!;
+
+            if (eventoB != null)
+            {
+                eventoB.DataEvento = evento.DataEvento;
+
+                eventoB.Descricao = evento.Descricao;
+
+                eventoB.NomeEvento = evento.NomeEvento;
+
+                eventoB.IdInstituicao= evento.IdInstituicao;
+
+                eventoB.IdTipoEvento= evento.IdTipoEvento;
+            }
+
+            _eventContext.Evento.Update(eventoB!);
+
+            _eventContext.SaveChanges();
         }
 
         public Evento BuscarPorId(Guid id)
@@ -32,11 +49,11 @@ namespace webapi.event_.tarde.Repositories
         {
             try
             {
-                TipoEvento eventoB = _eventContext.TipoEvento.Find(id);
+                Evento eventoB = _eventContext.Evento.Find(id);
 
                 if (eventoB != null)
                 {
-                    _eventContext.TipoEvento.Remove(eventoB);
+                    _eventContext.Evento.Remove(eventoB);
                 }
 
                 _eventContext.SaveChanges();

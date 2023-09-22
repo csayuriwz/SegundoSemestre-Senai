@@ -50,5 +50,49 @@ namespace webapi.event_.tarde.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _tipoUsuarioRepository.Deletar(id);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+                return Ok(_tipoUsuarioRepository.ListarTodos());
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Put(Guid id, TipoUsuario tipoUsuario)
+        {
+            try
+            {
+                _tipoUsuarioRepository.Atualizar(id, tipoUsuario);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

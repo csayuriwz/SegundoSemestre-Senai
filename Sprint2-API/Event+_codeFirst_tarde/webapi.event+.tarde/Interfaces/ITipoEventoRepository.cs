@@ -10,7 +10,7 @@ namespace webapi.event_.tarde.Interfaces
 
         TipoEvento BuscarPorId(Guid id);
 
-        void Atualizar(Guid id, TipoEvento tipousuario);
+        void Atualizar(Guid id, TipoEvento tipoevento);
 
         List<TipoEvento> ListarTodos();
     }

@@ -3,7 +3,7 @@ using webapi.event_.tarde.Domains;
 using webapi.event_.tarde.Interfaces;
 namespace webapi.event_.tarde.Repositories
 {
-    public class ComentarioEventoRepository : IComentarioEvento
+    public class ComentarioEventoRepository : IComentarioEventoRepository
     {
         private readonly EventContext _eventContext;
 
@@ -17,7 +17,13 @@ namespace webapi.event_.tarde.Repositories
 
             if (comentarioB != null)
             {
-               
+                comentarioB.Descricao = comentarioevento.Descricao;
+
+                comentarioB.Exibe = comentarioevento.Exibe;
+
+                comentarioB.IdUsuario = comentarioevento.IdUsuario;
+
+                comentarioB.IdEvento = comentarioB.IdEvento;
             }
 
             _eventContext.ComentarioEvento.Update(comentarioB!);
@@ -62,5 +68,6 @@ namespace webapi.event_.tarde.Repositories
         {
             return _eventContext.ComentarioEvento.ToList();
         }
+
     }
 }

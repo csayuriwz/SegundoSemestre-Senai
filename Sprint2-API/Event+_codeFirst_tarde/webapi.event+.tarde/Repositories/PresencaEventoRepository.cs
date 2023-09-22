@@ -14,7 +14,20 @@ namespace webapi.event_.tarde.Repositories
         }
         public void Atualizar(Guid id, PresencaEvento presencaevento)
         {
-            throw new NotImplementedException();
+            PresencaEvento presencaB = _eventContext.PresencaEvento.FirstOrDefault(e => e.IdPresencaEvento == id)!;
+
+            if (presencaB != null)
+            {
+                presencaB.Situacao = presencaevento.Situacao;
+
+                presencaB.Usuario = presencaevento.Usuario;
+
+                presencaB.Evento = presencaevento.Evento;
+            }
+
+            _eventContext.PresencaEvento.Update(presencaB!);
+
+            _eventContext.SaveChanges();
         }
 
         public PresencaEvento BuscarPorId(Guid id)

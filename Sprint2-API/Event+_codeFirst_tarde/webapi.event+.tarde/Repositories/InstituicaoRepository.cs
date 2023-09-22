@@ -14,7 +14,20 @@ namespace webapi.event_.tarde.Repositories
         }
         public void Atualizar(Guid id, Instituicao instituicao)
         {
-            throw new NotImplementedException();
+            Instituicao instituicaoB = _eventContext.Instituicao.FirstOrDefault(e => e.IdInstituicao == id)!;
+
+            if (instituicaoB != null)
+            {
+                instituicaoB.CNPJ = instituicao.CNPJ;
+
+                instituicaoB.Endereco = instituicao.Endereco;
+
+                instituicaoB.NomeFantasia = instituicao.NomeFantasia;
+            }
+
+            _eventContext.Instituicao.Update(instituicaoB!);
+
+            _eventContext.SaveChanges();
         }
 
         public Instituicao BuscarPorId(Guid id)
@@ -52,7 +65,7 @@ namespace webapi.event_.tarde.Repositories
 
         public List<Instituicao> ListarTodos()
         {
-            throw new NotImplementedException();
+            return _eventContext.Instituicao.ToList();
         }
     }
 }

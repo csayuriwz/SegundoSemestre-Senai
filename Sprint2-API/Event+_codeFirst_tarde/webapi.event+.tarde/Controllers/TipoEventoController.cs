@@ -61,5 +61,37 @@ namespace webapi.event_.tarde.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            try
+            {
+                return Ok(_tipoEventoRepository.ListarTodos());
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, TipoEvento tipoEvento)
+        {
+            try
+            {
+                _tipoEventoRepository.Atualizar(id, tipoEvento);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
+
 }

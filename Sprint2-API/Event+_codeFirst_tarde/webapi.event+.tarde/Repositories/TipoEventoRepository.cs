@@ -13,21 +13,20 @@ namespace webapi.event_.tarde.Repositories
         {
             _eventContext = new EventContext();
         }
-        public void Atualizar(Guid id, TipoEvento tipousuario)
+        public void Atualizar(Guid id, TipoEvento tipoEvento)
         {
-           
-                TipoEvento teventoBuscado = _eventContext.TipoEvento.Find(id)!;
+            TipoEvento teventoB = _eventContext.TipoEvento.FirstOrDefault(e => e.IdTipoEvento == id);
 
-                if (teventoBuscado != null)
-                {
-                teventoBuscado.Titulo = tipousuario.Titulo;
-                }
+            if (teventoB != null)
+            {
+                teventoB.Titulo = tipoEvento.Titulo;
+            }
 
-            _eventContext.TipoEvento.Update(teventoBuscado!);
+            _eventContext.TipoEvento.Update(teventoB);
 
             _eventContext.SaveChanges();
-            
         }
+    
 
         public TipoEvento BuscarPorId(Guid id)
         {
