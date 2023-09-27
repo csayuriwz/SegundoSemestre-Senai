@@ -63,9 +63,22 @@ namespace webapi.event_.tarde.Repositories
             }
         }
 
+        public List<PresencaEvento> ListarMinhasPresencas(Guid id)
+        {
+            try
+            {
+                return _eventContext.PresencaEvento.Where(e => e.IdUsuario == id).ToList();
+            }
+            catch (Exception )
+            {
+
+                throw;
+            }
+        }
+
         public List<PresencaEvento> ListarTodos()
         {
-            throw new NotImplementedException();
+            return _eventContext.PresencaEvento.ToList();
         }
 
     }

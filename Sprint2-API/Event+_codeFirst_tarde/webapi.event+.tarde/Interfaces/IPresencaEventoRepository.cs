@@ -14,5 +14,7 @@ namespace webapi.event_.tarde.Interfaces
 
         List<PresencaEvento> ListarTodos();
 
+        List<PresencaEvento> ListarMinhasPresencas(Guid id);
+
     }
 }
