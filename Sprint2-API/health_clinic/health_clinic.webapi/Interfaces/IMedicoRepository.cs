@@ -12,6 +12,6 @@ namespace health_clinic.webapi.Interfaces
 
         Medico BuscarPorEspecialidade(Especialidade especialidade);
 
-        List<Consulta> ListarMinhasConsultasM();
+        List<Consulta> ListarMinhasConsultasM(Guid id);
     }
 }

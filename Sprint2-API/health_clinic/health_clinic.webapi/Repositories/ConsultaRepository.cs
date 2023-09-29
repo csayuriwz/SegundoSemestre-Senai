@@ -14,7 +14,17 @@ namespace health_clinic.webapi.Repositories
         }
         public void Atualizar(Guid id, Consulta consulta)
         {
-            throw new NotImplementedException();
+            Consulta consultaB = _clinicContext.Consulta.Find(id);
+
+            if (consultaB != null)
+            {
+                consultaB.Prontuario = consulta.Prontuario;
+                consultaB.DataConsulta = consulta.DataConsulta;
+
+              
+            }
+            _clinicContext.Consulta.Update(consultaB);
+            _clinicContext.SaveChanges();
         }
 
         public void Cadastrar(Consulta consulta)
@@ -26,12 +36,28 @@ namespace health_clinic.webapi.Repositories
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Consulta consultaB = _clinicContext.Consulta.Find(id);
+
+                if (consultaB != null)
+                {
+                    _clinicContext.Consulta.Remove(consultaB);
+                }
+
+                _clinicContext.SaveChanges();
+            }
+
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<Consulta> ListarTodos()
         {
-            throw new NotImplementedException();
+            return _clinicContext.Consulta.ToList();
         }
     }
 }

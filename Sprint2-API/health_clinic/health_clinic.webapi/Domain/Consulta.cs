@@ -11,7 +11,10 @@ namespace health_clinic.webapi.Domain
 
         [Column(TypeName = "Date")]
         [Required(ErrorMessage = "A data da consulta é obrigatória!")]
-        public DateTime DataEvento { get; set; }
+        public DateTime DataConsulta{ get; set; }
+
+        [Column(TypeName = "VARCHAR(100)")]
+        public string? Prontuario { get; set; }
 
 
         //referencias para a tabela usuario
@@ -28,7 +31,7 @@ namespace health_clinic.webapi.Domain
         public Guid IdFeedBack { get; set; }
 
         [ForeignKey(nameof(IdFeedBack))]
-        public FeedBack? FeedBack { get; set; }
+        public Feedback? FeedBack { get; set; }
 
         //referencias para a tabela usuario
 

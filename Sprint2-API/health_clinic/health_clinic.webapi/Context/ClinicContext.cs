@@ -10,7 +10,7 @@ namespace health_clinic.webapi.Context
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Medico> Medico { get; set; }
-        public DbSet<Feedback> FeedBack { get; set; }
+        public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Especialidade> Especialidade { get; set; }
         public DbSet<Consulta> Consulta { get; set; }
         public DbSet<Clinica> Clinica { get; set; }

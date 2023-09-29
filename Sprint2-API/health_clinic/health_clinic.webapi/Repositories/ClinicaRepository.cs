@@ -14,7 +14,21 @@ namespace health_clinic.webapi.Repositories
         }
         public void Atualizar(Guid id, Clinica clinica)
         {
-            throw new NotImplementedException();
+            Clinica clinicaB = _clinicContext.Clinica.Find(id);
+
+            if ( clinicaB != null)
+            {
+                clinicaB.Endereco = clinica.Endereco;
+                clinicaB.CNPJ = clinica.CNPJ;
+                clinicaB.RazaoSocial = clinica.RazaoSocial;
+                clinicaB.NomeFantasia = clinica.NomeFantasia;
+                clinicaB.HorarioFuncionamento = clinica.HorarioFuncionamento;
+
+                _clinicContext.Clinica.Update(clinica!);
+
+                _clinicContext.SaveChanges();
+
+            }
         }
 
         public void Cadastrar(Clinica clinica)
@@ -26,7 +40,25 @@ namespace health_clinic.webapi.Repositories
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Clinica clinicaB = _clinicContext.Clinica.Find(id);
+
+                if (clinicaB != null)
+                {
+                    _clinicContext.Clinica.Remove(clinicaB);
+                }
+
+                _clinicContext.SaveChanges();
+            }
+
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
+
     }
 }
