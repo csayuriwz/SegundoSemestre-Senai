@@ -24,7 +24,7 @@ namespace health_clinic.webapi.Repositories
                 clinicaB.NomeFantasia = clinica.NomeFantasia;
                 clinicaB.HorarioFuncionamento = clinica.HorarioFuncionamento;
 
-                _clinicContext.Clinica.Update(clinica!);
+                _clinicContext.Clinica.Update(clinicaB);
 
                 _clinicContext.SaveChanges();
 

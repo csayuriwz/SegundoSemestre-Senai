@@ -14,14 +14,20 @@ namespace health_clinic.webapi.Repositories
         }
         public void Atualizar(Guid id, Medico medico)
         {
-            throw new NotImplementedException();
+            Medico medicoB = _clinicContext.Medico.Find(id);
+
+            if (medicoB != null)
+            {
+                medicoB.Nome = medico.Nome;
+                medicoB.CRM = medico.CRM;
+
+
+            }
+            _clinicContext.Medico.Update(medicoB);
+            _clinicContext.SaveChanges();
         }
 
-        public Medico BuscarPorEspecialidade(Especialidade especialidade)
-        { throw new NotImplementedException(); }
-
-        
-
+   
         public void Cadastrar(Medico medico)
         {
             _clinicContext.Medico.Add(medico);

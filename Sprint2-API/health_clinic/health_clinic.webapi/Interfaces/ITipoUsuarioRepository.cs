@@ -8,8 +8,6 @@ namespace health_clinic.webapi.Interfaces
 
         void Deletar(Guid id);
 
-        TipoUsuario BuscarPorId(Guid id);
-
         void Atualizar(Guid id, TipoUsuario tipoUsuario);
 
         List<TipoUsuario> ListarTodos();

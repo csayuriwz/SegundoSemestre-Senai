@@ -1,6 +1,7 @@
 ﻿using health_clinic.webapi.Context;
 using health_clinic.webapi.Domain;
 using health_clinic.webapi.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace health_clinic.webapi.Repositories
 {
@@ -14,7 +15,15 @@ namespace health_clinic.webapi.Repositories
         }
         public void Atualizar(Guid id, Feedback feedback)
         {
-            throw new NotImplementedException();
+            Feedback feedbackB = _clinicContext.Feedback.Find(id);
+
+            if (feedbackB != null)
+            {
+                feedbackB.Descricao = feedback.Descricao;
+               
+            }
+            _clinicContext.Feedback.Update(feedbackB);
+            _clinicContext.SaveChanges();
         }
 
         public void Cadastrar(Feedback feedback)
@@ -47,7 +56,17 @@ namespace health_clinic.webapi.Repositories
 
         public List<Feedback> ListarMeus(Guid id)
         {
-            throw new NotImplementedException();
+            Paciente pacientef = _clinicContext.Paciente.Find(id)!;
+            List<Feedback> list = new List<Feedback>();
+
+            foreach (Feedback feedback in _clinicContext.Feedback)
+            {
+                if (feedback.Consulta!.IdPaciente == pacientef.IdPaciente)
+                {
+                    list.Add(feedback);
+                }
+            }
+            return list;
         }
 
         public List<Feedback> ListarTodos()

@@ -1,6 +1,8 @@
 ﻿using health_clinic.webapi.Context;
 using health_clinic.webapi.Domain;
 using health_clinic.webapi.Interfaces;
+using health_clinic.webapi.Utils;
+using webapi.event_.tarde.Domains;
 
 namespace health_clinic.webapi.Repositories
 {
@@ -14,13 +16,21 @@ namespace health_clinic.webapi.Repositories
         }
         public void Atualizar(Guid id, Usuario usuario)
         {
-            throw new NotImplementedException();
+            Usuario usuarioB = _clinicContext.Usuario.Find(id);
+
+            if (usuarioB != null)
+            {
+                usuarioB.Senha = usuario.Senha;
+                usuarioB.Email = usuario.Email;
+                
+
+                _clinicContext.Usuario.Update(usuarioB);
+
+                _clinicContext.SaveChanges();
+
+            }
         }
 
-        public Usuario BuscarPorId(Guid id)
-        {
-            return _clinicContext.Usuario.FirstOrDefault(e => e.IdUsuario == id)!;
-        }
 
         public void Cadastrar(Usuario usuario)
         {
@@ -54,5 +64,9 @@ namespace health_clinic.webapi.Repositories
         {
             return _clinicContext.Usuario.ToList();
         }
+
+
+        
+
     }
 }

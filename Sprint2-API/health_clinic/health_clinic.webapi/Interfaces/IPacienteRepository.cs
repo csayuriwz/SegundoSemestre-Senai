@@ -8,8 +8,6 @@ namespace health_clinic.webapi.Interfaces
 
         void Deletar(Guid id);
 
-        Paciente BuscarPorCPF(Guid id);
-
         List<Consulta> ListarMinhasConsultasP();
 
     }

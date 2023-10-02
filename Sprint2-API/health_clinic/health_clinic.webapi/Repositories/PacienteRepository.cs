@@ -12,10 +12,7 @@ namespace health_clinic.webapi.Repositories
         {
             _clinicContext = new ClinicContext();
         }
-        public Paciente BuscarPorCPF(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void Cadastrar(Paciente paciente)
         {

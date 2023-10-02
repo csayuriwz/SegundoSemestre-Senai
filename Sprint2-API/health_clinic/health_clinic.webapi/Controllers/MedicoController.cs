@@ -49,5 +49,21 @@ namespace health_clinic.webapi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPut]
+        public IActionResult Put(Guid id, Medico medico)
+        {
+            try
+            {
+                _medicoRepository.Atualizar(id, medico);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

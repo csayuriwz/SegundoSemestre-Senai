@@ -10,8 +10,6 @@ namespace health_clinic.webapi.Interfaces
 
         void Atualizar(Guid id, Medico medico);
 
-        Medico BuscarPorEspecialidade(Especialidade especialidade);
-
         List<Consulta> ListarMinhasConsultasM(Guid id);
     }
 }

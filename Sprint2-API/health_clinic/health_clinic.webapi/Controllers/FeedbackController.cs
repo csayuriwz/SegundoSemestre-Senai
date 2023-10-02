@@ -63,5 +63,8 @@ namespace health_clinic.webapi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+
+        //falta listar todos
     }
 }

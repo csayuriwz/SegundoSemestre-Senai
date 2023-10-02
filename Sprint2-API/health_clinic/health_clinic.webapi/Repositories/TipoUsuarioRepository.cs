@@ -15,12 +15,18 @@ namespace health_clinic.webapi.Repositories
         }
         public void Atualizar(Guid id, TipoUsuario tipoUsuario)
         {
-            throw new NotImplementedException();
-        }
+            TipoUsuario tusuarioB = _clinicContext.TipoUsuario.Find(id);
 
-        public TipoUsuario BuscarPorId(Guid id)
-        {
-            return _clinicContext.TipoUsuario.FirstOrDefault(e => e.IdTipoUsuario == id)!;
+            if (tusuarioB != null)
+            {
+                tusuarioB.Titulo = tusuarioB.Titulo;
+                
+
+                _clinicContext.TipoUsuario.Update(tusuarioB);
+
+                _clinicContext.SaveChanges();
+
+            }
         }
 
         public void Cadastrar(TipoUsuario tipousuario)

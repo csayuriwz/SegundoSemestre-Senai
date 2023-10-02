@@ -17,7 +17,7 @@ namespace health_clinic.webapi.Domain
         public string? Prontuario { get; set; }
 
 
-        //referencias para a tabela usuario
+        //referencias para a tabela paciente
 
         [Required(ErrorMessage = "O paciente é obrigatório!")]
         public Guid IdPaciente { get; set; }
@@ -25,15 +25,7 @@ namespace health_clinic.webapi.Domain
         [ForeignKey(nameof(IdPaciente))]
         public Paciente? Paciente { get; set; }
 
-        //referencias para a tabela usuario
-
-        [Required(ErrorMessage = "O feedback é obrigatório!")]
-        public Guid IdFeedBack { get; set; }
-
-        [ForeignKey(nameof(IdFeedBack))]
-        public Feedback? FeedBack { get; set; }
-
-        //referencias para a tabela usuario
+        //referencias para a tabela medico
 
         [Required(ErrorMessage = "O medico é obrigatório!")]
         public Guid IdMedico { get; set; }
