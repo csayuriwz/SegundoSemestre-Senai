@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using health_clinic.webapi.Context;
 
@@ -11,9 +12,11 @@ using health_clinic.webapi.Context;
 namespace health_clinic.webapi.Migrations
 {
     [DbContext(typeof(ClinicContext))]
-    partial class ClinicContextModelSnapshot : ModelSnapshot
+    [Migration("20231004180614_BDv1")]
+    partial class BDv1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,6 +164,10 @@ namespace health_clinic.webapi.Migrations
                     b.Property<string>("CPF")
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)");
+
+                    b.Property<DateTime?>("DataNascimento")
+                        .IsRequired()
+                        .HasColumnType("DATETIME");
 
                     b.Property<string>("Endereco")
                         .IsRequired()

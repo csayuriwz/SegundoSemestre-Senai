@@ -17,10 +17,6 @@ namespace health_clinic.webapi.Domain
         [Required(ErrorMessage = "O telefone é obrigatório!")]
         public string? Telefone { get; set; }
 
-        [Column(TypeName = "DATETIME")]
-        [Required(ErrorMessage = "O nome é obrigatório!")]
-        public DateTime? DataNascimento { get; set; }
-
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage = "O endereco é obrigatório!")]
         public string? Endereco { get; set; }

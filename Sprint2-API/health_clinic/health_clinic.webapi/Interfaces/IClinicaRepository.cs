@@ -10,5 +10,8 @@ namespace health_clinic.webapi.Interfaces
         void Deletar(Guid id);
 
         void Atualizar(Guid id, Clinica clinica);
+
+        List<Clinica> ListarTodos();
+
     }
 }

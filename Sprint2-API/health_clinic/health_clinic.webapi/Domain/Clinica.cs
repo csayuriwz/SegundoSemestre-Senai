@@ -28,9 +28,14 @@ namespace health_clinic.webapi.Domain
         [Required(ErrorMessage = "A razão social é obrigatória!")]
         public string? RazaoSocial { get; set; }
 
-        [Column(TypeName = "DATETIME")]
-        [Required(ErrorMessage = "O horario de funcionamento é obrigatório!")]
-        public DateTime? HorarioFuncionamento { get; set; }
+
+        [Column(TypeName = "TIME")]
+        [Required(ErrorMessage = "O Horario de Abertura da Clinica é obrigatório!")]
+        public TimeSpan HorarioAbertura { get; set; }
+
+        [Column(TypeName = "TIME")]
+        [Required(ErrorMessage = "O Horario de Fechamento da Clinica é obrigatório!")]
+        public TimeSpan HorarioFechamento { get; set; }
 
     }
 }

@@ -22,7 +22,8 @@ namespace health_clinic.webapi.Repositories
                 clinicaB.CNPJ = clinica.CNPJ;
                 clinicaB.RazaoSocial = clinica.RazaoSocial;
                 clinicaB.NomeFantasia = clinica.NomeFantasia;
-                clinicaB.HorarioFuncionamento = clinica.HorarioFuncionamento;
+                clinicaB.HorarioAbertura = clinica.HorarioAbertura;
+                clinicaB.HorarioFechamento = clinica.HorarioFechamento;
 
                 _clinicContext.Clinica.Update(clinicaB);
 
@@ -57,6 +58,11 @@ namespace health_clinic.webapi.Repositories
 
                 throw;
             }
+        }
+
+        public List<Clinica> ListarTodos()
+        {
+            return _clinicContext.Clinica.ToList();
         }
 
 
