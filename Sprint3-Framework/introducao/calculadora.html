@@ -9,7 +9,7 @@
 <body>
     <h1>Simple Calc</h1>
 
-    <form >
+    <form onsubmit="calcular()">
         <label for="numero1">Primeiro Numero</label>
         <input type="number" id="numero1" placeholder="Primeiro Numero">
         <br><br>
@@ -20,57 +20,22 @@
 
         <label for="operacao">Operacao</label>
         <select id="operacao">
+
             <option value="">Selecione</option>
             <option value="+">Soma</option>
             <option value="-">Subtracao</option>
             <option value="*">Multiplicar</option>
             <option value="/">Divisao</option>
 
-
         </select>
 
-        <button onclick="calcular()">Calcular</button>
+        <p>Resultado: <strong id="resultado"></strong></p>
+
+        <br><br>
+        <button >Calcular</button>
     </form>
 
-    <script>
-        function calcular () {
-           event.preventDefault(); //INTERROMPE O SUBMIT DO FORMULARIO
-           let N1 = parseFloat( document.getElementById("numero1").value);
-           let N2 = parseFloat( document.getElementById("numero2").value);
-           let res;
-           let op = document.getElementById("operacao").value
-
-
-           if(op == '+') {
-            res = Somar(N1, N2);
-            console.log(`Resultado: ${res}`);
-           } else if (op == '-') {
-            res = Subtrair(N1, N2);
-            console.log(`Resultado: ${res}`);
-           }else if (op == '*') {
-            res = Multiplicar(N1, N2);
-            console.log(`Resultado: ${res}`);
-           }else if (op == '/') {
-            res = Dividir(N1, N2);
-            console.log(`Resultado: ${res}`);
-           }
-
-        }//fim da funcao calcular
-
-        function Somar (x,y) {
-            return x + y;
-        }
-
-        function Subtrair (x,y) {
-            return x - y;
-        }
-
-        function Multiplicar (x,y) {
-            return x * y;
-        }
-        function Dividir (x,y) {
-            return x / y;
-        }
-    </script>
+    <script src = "./scripts/funcoes.js"></script>
+         
 </body>
 </html>
