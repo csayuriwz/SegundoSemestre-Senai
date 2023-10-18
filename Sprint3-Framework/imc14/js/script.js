@@ -39,6 +39,7 @@ function calcularImc(peso , altura)
     // return peso / (altura ** 2);    
 }
 
+
 function geraSituacao(imc) 
 {
     if (imc <= 18.5) 
