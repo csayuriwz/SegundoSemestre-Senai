@@ -1,0 +1,22 @@
+{
+  "imc": [
+    {
+      "id": 1,
+      "nome": "Catarina",
+      "altura": "1.66",
+      "peso": 55,
+      "situacao": "peso ideal",
+      "imc": 18.99
+    },
+    [
+      {
+        "id": 1,
+        "nome": "Catarina",
+        "altura": "1.66",
+        "peso": 55,
+        "situacao": "peso ideal",
+        "imc": 18.99
+      }
+    ]
+  ]
+}
