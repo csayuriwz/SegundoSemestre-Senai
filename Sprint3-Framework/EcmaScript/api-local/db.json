@@ -1,22 +1,39 @@
 {
-  "imc": [
+  "contatos": [
     {
-      "id": 1,
-      "nome": "Catarina",
-      "altura": "1.66",
-      "peso": 55,
-      "situacao": "peso ideal",
-      "imc": 18.99
+      "cep": "08311400",
+      "endereco": "Travessa dos Caraibebes",
+      "bairro": "Jardim Rodolfo Pirani",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "id": 1
     },
-    [
-      {
-        "id": 1,
-        "nome": "Catarina",
-        "altura": "1.66",
-        "peso": 55,
-        "situacao": "peso ideal",
-        "imc": 18.99
-      }
-    ]
+    {
+      "cep": "08311400",
+      "endereco": "Travessa dos Caraibebes",
+      "bairro": "Jardim Rodolfo Pirani",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "id": 2
+    },
+    {
+      "cep": "03918020",
+      "endereco": "Alameda dos Contadores",
+      "bairro": "Vila Bancária",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "id": 3
+    },
+    {
+      "nome": "cat",
+      "telefone": "11988885978",
+      "cep": "09560500",
+      "endereco": "Alameda São Caetano",
+      "numero": "1526",
+      "bairro": "Santa Maria",
+      "cidade": "São Caetano do Sul",
+      "estado": "SP",
+      "id": 4
+    }
   ]
 }
