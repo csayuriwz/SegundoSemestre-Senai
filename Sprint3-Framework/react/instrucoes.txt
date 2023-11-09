@@ -1,5 +1,0 @@
-instalar o nodejs versao LTS
-instalar o create-react-app 
-    npm install create-react-app
-
-criar um projeto react  npx create-react-app helloword    
