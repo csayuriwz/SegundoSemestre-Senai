@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Introducão ao JavaScript</h1>
+
+<form action="">
+    <label for="nome">Nome: </label>
+    <input type="text" id="nome" name="nome" placeholder="Digite seu nome"/>
+    <br /><br />
+
+    <label for="sobrenome">sobrenome: </label>
+    <input type="text" id="sobrenome" placeholder="Digite seu sobrenome"/>
+    <br /><br />
+
+    <button onclick="alert('Boa tarde')">Boa tarde</button>
+    <button onclick="saudar()">Saudar</button>
+</form >
+
+    <script>
+        function saudar(){
+            event.preventDefault(); // para o submit do formulario
+            
+            let nome = document.getElementById("nome").value;
+            let sobrenome = document.getElementById("sobrenome").value;
+            
+            //interpolar o valor do nome completo
+            alert (`Boa tarde ${nome} ${sobrenome}!`); 
+            console.log(nome);
+            console.log(nome.placeholder);
+        
+        }
+    </script>
+</body>
+</html>
