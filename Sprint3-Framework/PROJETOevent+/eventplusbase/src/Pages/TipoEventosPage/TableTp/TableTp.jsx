@@ -34,7 +34,7 @@ const TableTp = ({ dados, fnUpdate, fnDelete }) => {
                 src={editPen}
                 alt="icone de caneta que simboliza o ato de editar"
                 onClick={() => {
-                  fnUpdate();
+                  fnUpdate(tp);
                 }}
               />
             </td>
@@ -45,7 +45,7 @@ const TableTp = ({ dados, fnUpdate, fnDelete }) => {
                 src={trashDelete}
                 alt="icone de lixeira que simboliza o ato de excluir algo"
                 onClick={() => {
-                  fnDelete();
+                  fnDelete(tp.idTipoEvento);
                 }}
               />
             </td>
