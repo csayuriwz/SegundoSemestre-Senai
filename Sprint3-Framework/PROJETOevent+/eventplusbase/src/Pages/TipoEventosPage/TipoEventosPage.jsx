@@ -8,41 +8,60 @@ import eventTypeImage from "../../assets/images/tipo-evento.svg";
 import Container from "../../Components/Container/Container";
 import { Button, Input } from "../../Components/FormComponents/FormComponents";
 
-import api from "../../Services/Service"
+import api from "../../Services/Service";
+import TableTp from "./TableTp/TableTp";
 
 const TipoEventosPage = () => {
   const [frmEdit, setFrmEdit] = useState(false);
   const [titulo, setTitulo] = useState("");
+
+  const [tipoEventos, setTipoEventos] = useState([
+    { idTipoEvento: "1234", titulo: "EventoABC" },
+    { idTipoEvento: "4321", titulo: "EventoCBA" },
+    { idTipoEvento: "1212", titulo: "EventoBCA" },
+  ]);
   async function handleSubmit(e) {
     //parar o submit do formulario
     e.preventDefault();
     //validar plmns 3 caracteres
     if (titulo.trim().length < 3) {
-        alert ("O titulo deve ter no minimo 3 carecteres ")
-        return;
+      alert("O titulo deve ter no minimo 3 carecteres ");
+      return;
     }
     //chamar a api
 
     try {
-        const retorno = await api.post("/TiposEvento", {titulo: titulo})
-        console.log("CADASTRADO COM SUCESSO");
-        console.log(retorno.data)
-        setTitulo(""); //limpa a variavel
+      const retorno = await api.post("/TiposEvento", { titulo: titulo });
+      console.log("CADASTRADO COM SUCESSO");
+      console.log(retorno.data);
+      setTitulo(""); //limpa a variavel
     } catch (error) {
-        console.log("Deu ruim na api");
-        console.log(error);
-
+      console.log("Deu ruim na api");
+      console.log(error);
     }
-
-    
-
-
   }
+
+  //ATUALIZACAO DOS DADOS
+  //(mostra a tela de edicao)
   function handleUpdate() {
     alert("Bora Atualizar");
   }
+
+  //mostra a forma atualizada
+  function showUpdate() {
+    alert("Bora editar")
+  }
+
+  function editActionAbort() {
+    alert("Cancelar a tela de edicao de dados");
+  }
+
+  function handleDelete() {
+    alert("Bora la apagar na api");
+  }
   return (
     <MainContent>
+      {/* Cadastro de tipo de eventos*/}
       <section className="cadastro-evento-section">
         <Container>
           <div className="cadastro-evento__box">
@@ -83,6 +102,19 @@ const TipoEventosPage = () => {
               {/* Atualizar  */}
             </form>
           </div>
+        </Container>
+      </section>
+
+      {/* Listagem de tipos de eventos */}
+      <section className="lista-eventos-section">
+        <Container>
+          <Title titleText={"Lista Tipo de Eventos"} color="white" />
+
+          <TableTp
+            dados={tipoEventos}
+            fnUpdate={showUpdate}
+            fnDelete={handleDelete}
+          />
         </Container>
       </section>
     </MainContent>
