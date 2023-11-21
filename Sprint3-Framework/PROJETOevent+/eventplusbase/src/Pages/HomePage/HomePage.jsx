@@ -22,7 +22,14 @@ const HomePage = () => {
           console.log (promise)
         } catch (error) {
           console.log(error)
-          alert('Deu ruim na api');
+          setNotifyUser({
+            titleNote: "Erro",
+            textNote: `Deu ruim na api`,
+            imgIcon: "danger",
+            imgAlt:
+              "Imagem de ilustração de perigo.",
+            showMessage: true,
+          });
         }
       }
       getProximosEventos();

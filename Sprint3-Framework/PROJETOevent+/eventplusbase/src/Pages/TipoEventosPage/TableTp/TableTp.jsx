@@ -22,34 +22,36 @@ const TableTp = ({ dados, fnUpdate, fnDelete }) => {
       </thead>
 
       <tbody>
-        {dados.map((tp) => {
-          return(<tr className="table-data__head-row">
-            <td className="table-data__data table-data__data--big">
-              {tp.titulo}
-            </td>
+        {dados.map((tipoEventos) => {
+          return (
+            <tr className="table-data__head-row">
+              <td className="table-data__data table-data__data--big">
+                {tipoEventos.titulo}
+              </td>
 
-            <td className="table-data__data table-data__data--little">
-              <img
-                className="table-data__icon"
-                src={editPen}
-                alt="icone de caneta que simboliza o ato de editar"
-                onClick={() => {
-                  fnUpdate(tp);
-                }}
-              />
-            </td>
+              <td className="table-data__data table-data__data--little">
+                <img
+                  className="table-data__icon"
+                  src={editPen}
+                  alt=""
+                  onClick={() => {
+                    fnUpdate(tipoEventos.idTipoEvento);
+                  }}
+                />
+              </td>
 
-            <td className="table-data__data table-data__data--little">
-              <img
-                className="table-data__icon"
-                src={trashDelete}
-                alt="icone de lixeira que simboliza o ato de excluir algo"
-                onClick={() => {
-                  fnDelete(tp.idTipoEvento);
-                }}
-              />
-            </td>
-          </tr> );  
+              <td className="table-data__data table-data__data--little">
+                <img
+                  className="table-data__icon"
+                  src={trashDelete}
+                  alt=""
+                  onClick={() => {
+                    fnDelete(tipoEventos.idTipoEvento);
+                  }}
+                />
+              </td>
+            </tr>
+          );
         })}
       </tbody>
     </table>

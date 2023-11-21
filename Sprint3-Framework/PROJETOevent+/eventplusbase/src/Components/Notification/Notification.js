@@ -1,142 +1,86 @@
-import React, { useState, useEffect } from "react";
-import Title from "../../Components/Title/Title";
-import "./TipoEventosPage.css";
-import MainContent from "../../Components/MainContent/MainContent";
-import ImageIllustrator from "../../Components/ImageIllustrator/ImageIllustrator";
+// Você pode utilizar bibliotecas de terceiroa para obter um componente de notificação - a React-toastify :)
+// https://fkhadra.github.io/react-toastify/introduction
 
-import eventTypeImage from "../../assets/images/tipo-evento.svg";
-import Container from "../../Components/Container/Container";
-import { Button, Input } from "../../Components/FormComponents/FormComponents";
+import React, { useEffect } from "react";
+// , { useEffect, useState }
+import successIlustrator from "../../assets/images/success-illustration.svg";
+import warningIlustrator from "../../assets/images/warning-illustration.svg";
+import dangerIllustrator from "../../assets/images/error-illustration.svg";
+import defaultIllustrator from "../../assets/images/default-image.jpeg";
 
-import api from "../../Services/Service";
-import TableTp from "./TableTp/TableTp";
+import "./Notification.css";
 
-const TipoEventosPage = () => {
-  const [frmEdit, setFrmEdit] = useState(false);
-  const [titulo, setTitulo] = useState("");
-  const [typeEvents, setTypeEvents] = useState([])
-
+function Notification({
+  titleNote = "Título não informado",
+  textNote = "Mensagem não informada",
+  imgIcon = "default",
+  imgAlt = "Icone da ilustração",
+  showMessage = false,
+  setNotifyUser,
+}) {
+  // resolver, está sendo chamada duas vezes.. componente sendo montado duas vezes na inicializa'ão
   useEffect(() => {
-    // chamar a api
-    async function getTipoEventos() {
-      try {
-        const promise = await api.get("/TiposEvento");
+    let initTimeout = () => {
+      const hide = () => {
+        setNotifyUser({});
+      };
 
-        setTypeEvents(promise.data);
+      setTimeout(() => {
+        hide();
+        clearTimeout(initTimeout);
+      }, 5000);
+    };
 
-      } catch (error) {
-        console.log(error);
-        alert("Deu ruim na api");
-      }
-    } getTipoEventos();
+    initTimeout();
+  }, [showMessage, setNotifyUser]);
 
-   
-  }, []);
+  function imageRender(nameImage) {
+    let imgIllustrator; //undefined
 
-  async function handleSubmit(e) {
-    //parar o submit do formulario
-    e.preventDefault();
-    //validar plmns 3 caracteres
-    if (titulo.trim().length < 3) {
-      alert("O titulo deve ter no minimo 3 carecteres ");
-      return;
+    // com o return não é necessário o break porém por questões didática ele ficará aí
+    switch (nameImage.toLowerCase()) {
+      case "success":
+        imgIllustrator = successIlustrator;
+        break;
+      case "warning":
+        imgIllustrator = warningIlustrator;
+        break;
+      case "danger":
+        imgIllustrator = dangerIllustrator;
+        break;
+
+      default:
+        imgIllustrator = defaultIllustrator;
+        break;
     }
-    //chamar a api
 
-    try {
-      const retorno = await api.post("/TiposEvento", { titulo: titulo });
-      console.log("CADASTRADO COM SUCESSO");
-      console.log(retorno.data);
-      setTitulo(""); //limpa a variavel
-    } catch (error) {
-      console.log("Deu ruim na api");
-      console.log(error);
-    }
+    return imgIllustrator;
   }
 
-  //ATUALIZACAO DOS DADOS
-  //(mostra a tela de edicao)
-  function handleUpdate() {
-    alert("Bora Atualizar");
-  }
-
-  //mostra a forma atualizada
-  function showUpdate(tipoEvento) {
-    try {
-      //busca o input (form)
-      
-    } catch (error) {
-      
-    }
-  }
-
-  function editActionAbort() {
-    alert("Cancelar a tela de edicao de dados");
-  }
-
-  function handleDelete() {
-    alert("Bora la apagar na api");
-  }
   return (
-    <MainContent>
-      {/* Cadastro de tipo de eventos*/}
-      <section className="cadastro-evento-section">
-        <Container>
-          <div className="cadastro-evento__box">
-            <Title titleText={"Página Tipos de Eventos"} />
-            <ImageIllustrator alterText={"???"} imageRender={eventTypeImage} />
-
-            <form
-              className="ftipo-evento"
-              onSubmit={frmEdit ? handleUpdate : handleSubmit}
-            >
-              {!frmEdit ? (
-                /* Cadastrar*/
-                <>
-                  <Input
-                    type={"text"}
-                    id={"titulo"}
-                    name={"titulo"}
-                    placeholder={"Título"}
-                    required={"required"}
-                    value={titulo}
-                    manipulationFunction={(e) => {
-                      setTitulo(e.target.value);
-                    }}
-                  />
-                  <span>{titulo}</span>
-
-                  <Button
-                    type={"submit"}
-                    id={"cadastrar"}
-                    name={"cadastrar"}
-                    textButton={"Cadastrar"}
-                  />
-                </>
-              ) : (
-                <p>Tela de Edicao</p>
-              )}
-
-              {/* Atualizar  */}
-            </form>
-          </div>
-        </Container>
-      </section>
-
-      {/* Listagem de tipos de eventos */}
-      <section className="lista-eventos-section">
-        <Container>
-          <Title titleText={"Lista Tipo de Eventos"} color="white" />
-
-          <TableTp
-            dados={typeEvents}
-            fnUpdate={showUpdate}
-            fnDelete={handleDelete}
-          />
-        </Container>
-      </section>
-    </MainContent>
+    // <article className={`notification ${showNotification ? 'notification--show' : ''}`}>
+    <article
+      className={`notification ${showMessage ? "notification--show" : ""}`}
+    >
+      <span
+        className="notification__close"
+        onClick={() => {
+          setNotifyUser({});
+        }}
+      >
+        x
+      </span>
+      <img
+        className="notification__icon"
+        src={imageRender(imgIcon)}
+        alt={imgAlt}
+      />
+      <div className="notification__message-box">
+        <h2 className="notification__title">{titleNote}</h2>
+        <p className="notification__text">{textNote}</p>
+      </div>
+    </article>
   );
-};
+}
 
-export default TipoEventosPage;
+export default Notification;
