@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Input } from "../../Components/FormComponents/FormComponents";
+import {
+  Button,
+  Input,
+  Select,
+} from "../../Components/FormComponents/FormComponents";
 import Title from "../../Components/Title/Title";
 import "../../Pages/EventosPage/EventosPage.css";
 import MainContent from "../../Components/MainContent/MainContent";
@@ -9,12 +13,20 @@ import Container from "../../Components/Container/Container";
 import TableEv from "../EventosPage/TableEv/TableEv";
 import api from "../../Services/Service";
 import Spinner from "../../Components/Spinner/Spinner";
+import Notification from "../../Components/Notification/Notification";
 
 const EventosPage = () => {
   const [notifyUser, setNotifyUser] = useState({});
   const [Eventos, setEventos] = useState([]);
   const [tipoEventos, setTipoEventos] = useState([]);
   const [showSpinner, setShowSpinner] = useState(true);
+  const [titulo, setTitulo] = useState("");
+  const [data, setData] = useState("");
+  const [select, setSelect] = useState("");
+  
+  const [descricao  , setDescricao] = useState("");
+  const [idEvento, setIdEvento] = useState(null);
+  const [frmEdit, setFrmEdit] = useState(true);
 
   useEffect(() => {
     async function getEvento() {
@@ -29,15 +41,15 @@ const EventosPage = () => {
     }
 
     async function getTipoEvento() {
-        setShowSpinner(true);
-        try {
-          const promise = await api.get("/TiposEvento");
-          setTipoEventos(promise.data);
-        } catch (error) {
-          console.log("Deu ruim na api");
-        }
-        setShowSpinner(false);
+      setShowSpinner(true);
+      try {
+        const promise = await api.get("/TiposEvento");
+        setTipoEventos(promise.data);
+      } catch (error) {
+        console.log("Deu ruim na api");
       }
+      setShowSpinner(false);
+    }
     getEvento();
     getTipoEvento();
   }, []);
@@ -55,15 +67,101 @@ const EventosPage = () => {
         showMessage: true,
       });
 
-      const promiseGet = await api.get("/TiposEvento");
+      const promiseGet = await api.get("/Evento");
       setEventos(promiseGet.data);
     } catch (error) {
       console.log("Deu ruim na api");
     }
   }
 
+  async function handleSubmit(e) {
+    //parar o submit do formulario
+    e.preventDefault();
+    //validar pelo menos 3 caracteres
+    if (titulo.trim().length < 3) {
+      setNotifyUser({
+        titleNote: "Aviso",
+        textNote: `Deu ruim na api!`,
+        imgIcon: "danger",
+        imgAlt:
+          "Imagem de ilustração de aviso. Moça segurando um balão com símbolo de confirmação ok.",
+        showMessage: true,
+      });
+    }
+    //chamar a api
+    try {
+      const promise = await api.post("/Evento", { titulo: titulo });
+      console.log("CADASTRADO COM SUCESSO");
+      setNotifyUser({
+        titleNote: "Sucesso",
+        textNote: `Cadastrado com sucesso!`,
+        imgIcon: "success",
+        imgAlt:
+          "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+        showMessage: true,
+      });
+      console.log(promise.data);
+      setTitulo(""); //limpa a variavel
+
+      const promiseGet = await api.get("/Evento");
+      setEventos(promiseGet.data);
+    } catch (error) {
+      console.log("Deu ruim na api");
+    }
+  }
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+
+    //propriedade:valor
+
+    try {
+      const retorno = await api.put("/Evento/" + idEvento, { titulo: titulo });
+
+      const retornoGet = await api.get("/Evento");
+      setEventos(retornoGet.data);
+
+      editActionAbort();
+    } catch (error) {
+      setNotifyUser({
+        titleNote: "Erro",
+        textNote: `Problemas na atualizacao. Verifique a conexao com a internet!`,
+        imgIcon: "danger",
+        imgAlt: "Imagem de ilustração de perigo.",
+        showMessage: true,
+      });
+    }
+  }
+
+  async function showUpdateForm(idElemento) {
+    setFrmEdit(true);
+    //fazer um getById para pegar os dados
+
+    try {
+      const retorno = await api.get("/Evento/" + idElemento);
+
+      setTitulo(retorno.data.titulo);
+      setIdEvento(retorno.data.idTipoEvento);
+    } catch (error) {
+      setNotifyUser({
+        titleNote: "Erro",
+        textNote: `Deu ruim na api!`,
+        imgIcon: "warning",
+        imgAlt: "Imagem de ilustração de perigo.",
+        showMessage: true,
+      });
+    }
+  }
+
+  function editActionAbort() {
+    setFrmEdit(false);
+    setTitulo("");
+    setIdEvento(null);
+  }
+
   return (
     <MainContent>
+      <Notification {...notifyUser} setNotifyUser={setNotifyUser} />
       {showSpinner ? <Spinner /> : null}
       {/*cadastro de eventos*/}
 
@@ -76,39 +174,75 @@ const EventosPage = () => {
               imageRender={eventImageIllustrator}
             />
 
-            <form className="ftipo-evento">
+            <form
+              className="ftipo-evento"
+              onSubmit={frmEdit ? handleUpdate : handleSubmit}
+            >
               <>
                 <Input
                   type={"text"}
                   id={"nome"}
                   name={"nome"}
-                  placeholder={"Nome"}
-                  //   manipulationFunction={"???"} // PENDENTE
+                  value={titulo}
+                  placeholder={"titulo"}
+                  manipulationFunction={(e) => {
+                    setTitulo(e.target.value);
+                  }}
                 />
 
                 <Input
                   type={"text"}
                   id={"descricao"}
                   name={"descricao"}
+                  value={descricao}
                   placeholder={"Descrição"}
-                  //   manipulationFunction={"???"} // PENDENTE
+                  manipulationFunction={(e) => {
+                    setDescricao(e.target.value);
+                  }}
+                 
                 />
 
-                <select name="tipo-evento-select">
-                  {tipoEventos.map((evento) => {
-                    return <option>{`${evento.titulo}`}</option>;
-                  })}
-                </select>
+                <Select id={""} name={""} required tipoEventos={tipoEventos} value={Select} />
 
                 <Input
                   type={"date"}
                   id={"data"}
                   name={"data"}
-                  //   placeholder={"dd/mm/aaaa"}
-                  //   manipulationFunction={"???"} // PENDENTE
+                  value = {data}
+                  manipulationFunction={(e) => {
+                    setData(e.target.value);
+                  }}
+                 
                 />
+                {!frmEdit ? (
+                  <Button
+                    type={"submit"}
+                    id={"cadastrar"}
+                    name={"cadastrar"}
+                    textButton={"Cadastrar"}
+                  />
+                ) : (
+                  <>
+                    <div className="buttons-editbox">
+                      <Button
+                        textButton="Atualizar"
+                        id="atualizar"
+                        name="atualizar"
+                        type="submit"
+                        additionalClass="button-component--middle"
+                      />
+                      <Button
+                        textButton="Cancelar"
+                        id="cancelar"
+                        name="cancelar"
+                        type="button"
+                        manipulationFunction={editActionAbort}
+                        additionalClass="button-component--middle"
+                      />
+                    </div>
+                  </>
+                )}
               </>
-              /
             </form>
           </div>
         </Container>
@@ -120,7 +254,7 @@ const EventosPage = () => {
           <Title titleText={"Lista de Eventos"} color="white" />
           <TableEv
             dados={Eventos}
-            fnUpdate={handleDelete}
+            fnUpdate={showUpdateForm}
             fnDelete={handleDelete}
           />
         </Container>

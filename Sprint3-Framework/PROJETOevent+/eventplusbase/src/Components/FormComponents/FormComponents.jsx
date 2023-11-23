@@ -2,6 +2,7 @@ import React from 'react';
 import './FormComponents.css'
 
 
+
 export const Input = ({
     type,
     id,
@@ -40,5 +41,31 @@ export const Button = ({textButton,id, name, type, additionalClass = "", manipul
         >
             {textButton}
         </button>
+    );
+}
+
+
+export const Select = ({
+    tipoEventos,
+    id,
+    name,
+    required,
+    additionalClass,
+    manipulationFunction,
+    defaultValue
+}) => {
+    return (
+        <select 
+        name={name}
+        id={id}
+        required={required}
+        className={`input-component ${additionalClass}`}
+        onChane={manipulationFunction}
+        value={defaultValue}>
+            <option value="">Selecione</option>
+            {tipoEventos.map((opt) => {
+                return <option value={opt.titulo}>{opt.titulo}</option>
+            })}
+        </select>
     );
 }
