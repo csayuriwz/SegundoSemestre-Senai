@@ -20,13 +20,15 @@ const EventosPage = () => {
   const [Eventos, setEventos] = useState([]);
   const [tipoEventos, setTipoEventos] = useState([]);
   const [showSpinner, setShowSpinner] = useState(true);
+  const [frmEdit, setFrmEdit] = useState(true);
+
   const [titulo, setTitulo] = useState("");
   const [data, setData] = useState("");
   const [select, setSelect] = useState("");
-  
-  const [descricao  , setDescricao] = useState("");
+  const [descricao, setDescricao] = useState("");
   const [idEvento, setIdEvento] = useState(null);
-  const [frmEdit, setFrmEdit] = useState(true);
+  const [instituicao, setIdInstituicao] = useState("eb404169-6b81-438b-9f04-1b34a49bcdd5");
+  const [idTipoEvento, setIdTipoEvento] = useState("a76f1bf2-0dfe-4c0b-9236-4b334115602d");
 
   useEffect(() => {
     async function getEvento() {
@@ -81,16 +83,23 @@ const EventosPage = () => {
     if (titulo.trim().length < 3) {
       setNotifyUser({
         titleNote: "Aviso",
-        textNote: `Deu ruim na api!`,
+        textNote: `O nome do evento precisa possuir 3 caracteres ou mais!`,
         imgIcon: "danger",
         imgAlt:
           "Imagem de ilustração de aviso. Moça segurando um balão com símbolo de confirmação ok.",
         showMessage: true,
       });
     }
-    //chamar a api
+    //chamar a api 
     try {
-      const promise = await api.post("/Evento", { titulo: titulo });
+      const promise = await api.post("/Evento", {
+        nomeEvento: titulo,
+        dataEvento: data,
+        descricao: descricao,
+        idTipoEvento: idTipoEvento,
+        idInstituicao: instituicao
+
+      });
       console.log("CADASTRADO COM SUCESSO");
       setNotifyUser({
         titleNote: "Sucesso",
@@ -106,7 +115,7 @@ const EventosPage = () => {
       const promiseGet = await api.get("/Evento");
       setEventos(promiseGet.data);
     } catch (error) {
-      console.log("Deu ruim na api");
+      console.log("oie");
     }
   }
 
@@ -116,7 +125,11 @@ const EventosPage = () => {
     //propriedade:valor
 
     try {
-      const retorno = await api.put("/Evento/" + idEvento, { titulo: titulo });
+      const retorno = await api.put("/Evento/" + idEvento, { nomeEvento: titulo,
+        dataEvento: data,
+        descricao: descricao,
+        idTipoEvento: idTipoEvento,
+        idInstituicao: instituicao});
 
       const retornoGet = await api.get("/Evento");
       setEventos(retornoGet.data);
@@ -199,20 +212,28 @@ const EventosPage = () => {
                   manipulationFunction={(e) => {
                     setDescricao(e.target.value);
                   }}
-                 
                 />
 
-                <Select id={""} name={""} required tipoEventos={tipoEventos} value={Select} />
+                <Select
+                  id={""}
+                  name={""}
+                  required
+                  tipoEventos={tipoEventos}
+                  value={Select}
+                  manipulationFunction={(e) => {
+                    setSelect(e.target.value);
+                  }}
+
+                />
 
                 <Input
                   type={"date"}
                   id={"data"}
                   name={"data"}
-                  value = {data}
+                  value={data}
                   manipulationFunction={(e) => {
                     setData(e.target.value);
                   }}
-                 
                 />
                 {!frmEdit ? (
                   <Button

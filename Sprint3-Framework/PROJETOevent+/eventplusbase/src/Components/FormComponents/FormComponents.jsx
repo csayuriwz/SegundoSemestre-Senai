@@ -46,7 +46,7 @@ export const Button = ({textButton,id, name, type, additionalClass = "", manipul
 
 
 export const Select = ({
-    tipoEventos,
+    tipoEventos = [],
     id,
     name,
     required,
