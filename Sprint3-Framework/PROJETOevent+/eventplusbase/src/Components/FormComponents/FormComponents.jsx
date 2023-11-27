@@ -1,71 +1,77 @@
-import React from 'react';
-import './FormComponents.css'
-
-
+import React from "react";
+import "./FormComponents.css";
 
 export const Input = ({
-    type,
-    id,
-    required,
-    aditionalClass,
-    name,
-    value,
-    placeholder,
-    manipulationFunction
+  type,
+  id,
+  value,
+  required,
+  additionalClass,
+  name,
+  placeholder,
+  manipulationFunction,
 }) => {
-    return (
-        <input 
-        type={type}
-        id={id}
-        value={value}
-        name={name}
-        required={required}
-        className={`input-component ${aditionalClass}`}
-        placeholder={placeholder}
-        onChange={manipulationFunction}
-        autoComplete='off'
-        
+  return (
+    <input
+      type={type}
+      id={id}
+      name={name}
+      value={value}
+      required={required}
+      className={`input-component ${additionalClass}`}
+      placeholder={placeholder}
+      onChange={manipulationFunction}
+      autoComplete="off"
+    />
+  );
+};
 
-        />
-    );
-}
-
-export const Button = ({textButton,id, name, type, additionalClass = "", manipulationFunction}) => {
-    return (
-        <button     
-            type={type}
-            name={name}
-            id={id}
-            className={`button-component ${additionalClass}`}
-            onClick={manipulationFunction}
-        >
-            {textButton}
-        </button>
-    );
-}
-
+export const Button = ({
+  textButton,
+  id,
+  name,
+  type,
+  additionalClass = "",
+  manipulationFunction,
+}) => {
+  return (
+    <button
+      type={type}
+      name={name}
+      id={id}
+      className={`button-component ${additionalClass}`}
+      textButton={textButton}
+      onClick={manipulationFunction}
+    >
+      {textButton}
+    </button>
+  );
+};
 
 export const Select = ({
-    tipoEventos = [],
-    id,
-    name,
-    required,
-    additionalClass,
-    manipulationFunction,
-    defaultValue
+  id,
+  name,
+  required,
+  tipoEventosDados = [],
+  additionalClass = "",
+  manipulationFunction,
+  defaultValue,
 }) => {
-    return (
-        <select 
-        name={name}
-        id={id}
-        required={required}
-        className={`input-component ${additionalClass}`}
-        onChane={manipulationFunction}
-        value={defaultValue}>
-            <option value="">Selecione</option>
-            {tipoEventos.map((opt) => {
-                return <option value={opt.titulo}>{opt.titulo}</option>
-            })}
-        </select>
-    );
-}
+  return (
+    <select
+      id={id}
+      name={name}
+      required={required}
+      className={`input-component ${additionalClass}`}
+      onChange={manipulationFunction}
+      value={defaultValue}
+      // name="tipo-evento-select"
+      // className="input-component"
+    >
+      <option value="">Selecione</option>
+      {tipoEventosDados.map((tp) => {
+        return <option value={tp.idTipoEvento}>{`${tp.titulo}`}</option>;
+      })}
+    </select>
+  );
+};

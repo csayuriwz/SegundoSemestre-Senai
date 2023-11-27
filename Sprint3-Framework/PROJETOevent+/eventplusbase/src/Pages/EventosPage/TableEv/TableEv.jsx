@@ -1,95 +1,63 @@
 import React from "react";
-import "./TableEv.css";
-
 import editPen from "../../../assets/images/edit-pen.svg";
-import trashDelete from "../../../assets/images/trash-delete.svg";
+import deleteTrash from "../../../assets/images/trash-delete.svg";
 
 const TableEv = ({ dados, fnUpdate, fnDelete }) => {
   return (
     <table className="table-data">
-      <thead className="table-data__head">
+      <thead>
         <tr className="table-data__head-row">
           <th className="table-data__head-title table-data__head-title--big">
             Evento
           </th>
-
-
-
           <th className="table-data__head-title table-data__head-title--big">
-            Descricao
+            Descrição
           </th>
-
-
-
+          <th className="table-data__head-title table-data__head-title--big">Tipo Evento</th>
           <th className="table-data__head-title table-data__head-title--big">
-            Tipo Evento
+            Data
           </th>
-
-
-
           <th className="table-data__head-title table-data__head-title--big">
-            Data do Evento
-          </th>
-
-
-
-          <th className="table-data__head-title table-data__head-title--little">
             Editar
           </th>
-
-
-
-          <th className="table-data__head-title table-data__head-title--little">
+          <th className="table-data__head-title table-data__head-title--big">
             Deletar
           </th>
         </tr>
       </thead>
 
       <tbody>
-        {dados.map((Evento) => {
+        {dados.map((evento) => {
           return (
             <tr className="table-data__head-row">
               <td className="table-data__data table-data__data--big">
-                {Evento.nomeEvento}
+                {evento.nomeEvento}
               </td>
-
-
               <td className="table-data__data table-data__data--big">
-                {Evento.descricao}
+                {evento.descricao}
               </td>
-
-
+              <td className="table-data__data table-data__data--big">{evento.tiposEvento.titulo}</td>
               <td className="table-data__data table-data__data--big">
-                {Evento.tiposEvento.titulo}
+                {new Date(evento.dataEvento).toLocaleDateString()}
               </td>
-
-
-
               <td className="table-data__data table-data__data--big">
-                {new Date(Evento.dataEvento).toLocaleDateString()}
-              </td>
-
-
-
-
-              <td className="table-data__data table-data__data--little">
                 <img
                   className="table-data__icon"
                   src={editPen}
-                  alt=""
+                  alt="Ícone de lápis, indicando edição dos dados"
                   onClick={() => {
-                    fnUpdate(Evento.idEvento);
+                    fnUpdate(evento);
                   }}
                 />
               </td>
 
-              <td className="table-data__data table-data__data--little">
+              <td className="table-data__data table-data__data--big">
                 <img
                   className="table-data__icon"
-                  src={trashDelete}
-                  alt=""
+                  src={deleteTrash}
+                  alt="Lata de lixo, indicando deleção dos dados"
                   onClick={() => {
-                    fnDelete(Evento.idEvento);
+                    fnDelete(evento.idEvento);
                   }}
                 />
               </td>
