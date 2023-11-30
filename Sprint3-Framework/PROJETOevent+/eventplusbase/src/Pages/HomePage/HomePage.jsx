@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import './HomePage.css'
 import MainContent from "../../Components/MainContent/MainContent";
 import Banner from "../../Components/Banner/Banner";
@@ -8,8 +8,13 @@ import NextEvent from "../../Components/NextEvent/NextEvent";
 import Title from "../../Components/Title/Title";
 import Container from "../../Components/Container/Container";
 import api from "../../Services/Service";
+import { UserContext } from "../../Context/authContext";
 
 const HomePage = () => {
+
+  const {userData} = useContext(UserContext)
+  console.log("DADOS GLOBAIS DO USUARIO")
+  console.log(userData)
   
     useEffect(()=> {
       // chamar a api
