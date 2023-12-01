@@ -1,4 +1,5 @@
-﻿using webapi.event_.Domains;
+﻿using webapi.event_.Controllers;
+using webapi.event_.Domains;
 
 namespace webapi.event_.Interfaces
 {
@@ -10,5 +11,6 @@ namespace webapi.event_.Interfaces
         void Atualizar(Guid id, PresencasEvento presencaEvento);
         List<PresencasEvento> ListarMinhas(Guid id);
         void Inscrever(PresencasEvento inscricao);
+      
     }
 }
