@@ -13,6 +13,7 @@ import {
   Button,
   Input,
   Select,
+  SelectTipoEvento,
 } from "../../Components/FormComponents/FormComponents";
 import TableEv from "./TableEv/TableEv";
 
@@ -326,7 +327,7 @@ const Eventos = () => {
                   }}
                 />
 
-                <Select
+                <SelectTipoEvento
                   id={"idTipoEvento"}
                   required
                   tipoEventosDados={tipoEventos}

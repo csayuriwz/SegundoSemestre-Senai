@@ -5,7 +5,7 @@ using webapi.event_.Repositories;
 
 namespace webapi.event_.Controllers
 {
-    [Route("api/controller")]
+    [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
     public class PresencasEventoController : Controller
@@ -47,7 +47,7 @@ namespace webapi.event_.Controllers
         }
 
 
-        [HttpGet("ListarMinhas/{id})")]
+        [HttpGet("ListarMinhas/{id}")]
         public IActionResult GetMyList(Guid id)
         {
 
@@ -59,6 +59,37 @@ namespace webapi.event_.Controllers
             {
 
                 return BadRequest(e.Message); 
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _presencasEventoRepository.Deletar(id);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        [HttpGet("BuscarPorId/{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_presencasEventoRepository.BuscarPorId(id));
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
             }
         }
         
