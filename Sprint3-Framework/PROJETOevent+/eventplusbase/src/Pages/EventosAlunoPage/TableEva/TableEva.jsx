@@ -40,13 +40,15 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
-                <img
+                {e.situacao ? (<img
                   className="tbal-data__icon"
                   idevento={e.idEvento}
                   src={comentaryIcon}
                   alt=""
                   onClick={fnShowModal}
-                />
+                />) :
+                null
+                }
 
                 <ToggleSwitch
                 toggleActive = {e.situacao}

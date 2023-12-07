@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import trashDelete from "../../assets/images/trash-delete-red.png";
 
 import { Button, Input } from "../FormComponents/FormComponents";
@@ -14,6 +14,7 @@ const Modal = ({
   fnPost = null,
   
 }) => {
+  const [comentaryInput, setComentaryInput] = useState("")
 
   return (
     <div className="modal">
@@ -42,6 +43,10 @@ const Modal = ({
         <Input
           placeholder="Escreva seu comentário..."
           additionalClass="comentary__entry"
+          value = {comentaryInput}
+          manipulationFunction={(e)=>{
+            setComentaryInput(e.target.value)
+          }}
         />
 
         <Button

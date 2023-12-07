@@ -13,6 +13,9 @@ import "./EventosAlunoPage.css";
 import { UserContext } from "../../Context/authContext";
 
 const EventosAlunoPage = () => {
+  const [idEventoComentario, setIdEventoComentario] = useState ("")
+  const [comentario, setComentario] = ("")
+
   // state do menu mobile
   const [exibeNavbar, setExibeNavbar] = useState(false);
   const [eventos, setEventos] = useState([]);
@@ -91,7 +94,8 @@ const EventosAlunoPage = () => {
   }
 
   async function loadMyComentary(idComentary) {
-    return "????";
+    const promise = await api.get(`/ComentariosEvento/BuscarPorIdUsuario?idUsuario=${userData.userId}&idEvento=${idEventoComentario}`)
+    setComentario(promise.data.descricao)
   }
 
   const showHideModal = () => {
@@ -197,7 +201,8 @@ const EventosAlunoPage = () => {
         </Container>
       </MainContent>
 
-      {/* SPINNER -Feito com position */}
+     
+     {/* SPINNER */}
       {showSpinner ? <Spinner /> : null}
 
       {showModal ? (
@@ -207,6 +212,7 @@ const EventosAlunoPage = () => {
           fnDelete={commentaryRemove}
           fnGet={loadMyComentary}
           fnPost={postMyComentary}
+          comentaryText={comentario}
         />
       ) : null}
     </>
