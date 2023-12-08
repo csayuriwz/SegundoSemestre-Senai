@@ -71,6 +71,9 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
+    //Adicionar dentro de AddSwaggerGen
+    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
 
     //Configura o Swagger para usar o arquivo XML gerado
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -117,12 +120,18 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-//Habilite o middleware para atender ao documento JSON gerado e à interface do usuário do Swagger
+//Alterar dados do Swagger para a seguinte configuração
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseSwagger(options =>
+{
+    options.SerializeAsV2 = true;
+});
+
+app.UseSwaggerUI();
 
 //Para atender à interface do usuário do Swagger na raiz do aplicativo
 app.UseSwaggerUI(options =>
@@ -130,6 +139,9 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
+
+//AAdicionar o uso dos recursos
+app.UseRouting();
 
 app.UseCors("CorsPolicy");
 

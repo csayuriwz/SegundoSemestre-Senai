@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BCrypt.Net;
+using Microsoft.EntityFrameworkCore;
 using webapi.event_.Domains;
 
 namespace webapi.event_.Contexts
@@ -16,7 +17,7 @@ namespace webapi.event_.Contexts
 
         public DbSet<Evento> Evento { get; set; }
 
-        public DbSet<ComentariosEvento> ComentariosEvento{ get; set; }
+        public DbSet<ComentariosEvento> ComentariosEvento { get; set; }
 
         public DbSet<Instituicao> Instituicao { get; set; }
 
@@ -28,7 +29,13 @@ namespace webapi.event_.Contexts
         /// <param name="optionsBuilder">Objeto com as configurações definidas</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-2B634JF; Database=event+_catarina; User Id=sa; Pwd=Senai@134; TrustServerCertificate=true;");
+            //string de conexao local(ssms)
+            //optionsBuilder.UseSqlServer("Server=DESKTOP-2B634JF; Database=event+_catarina; User Id=sa; Pwd=Senai@134; TrustServerCertificate=true;");
+
+            //string de conexao SQL-DATABASE - AZURE
+
+            optionsBuilder.UseSqlServer(" Server = tcp:eventcatarina-server.database.windows.net,1433; Initial Catalog = eventCatarinaDatabase; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;User Id = eventcatarina-server; Pwd=Senai@134;");
+
             base.OnConfiguring(optionsBuilder);
         }
     }
